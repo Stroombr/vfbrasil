@@ -1,38 +1,46 @@
-import { Check, CheckCircle, X } from "phosphor-react";
-
 import Image from 'next/image'
+
 import gerdauLogo from '../public/gerdau.png'
 import sinobrasLogo from '../public/sinobras.png'
 import votorantimLogo from '../public/votorantim-metais.png'
 import acerosLogo from '../public/aceros.png'
 
+const clients = [
+  { src: gerdauLogo, alt: 'Logo Gerdau' },
+  { src: sinobrasLogo, alt: 'Logo Sinobras' },
+  { src: votorantimLogo, alt: 'Logo Votorantim Metais' },
+  { src: acerosLogo, alt: 'Logo Aceros' },
+]
+
 export function ClientList() {
-    return (
-        <section>
-            <div className="pt-8 mx-auto max-w-4xl lg:text-center">
-          <h2 className="text-base font-semibold leading-7 text-yellow-600">Confiada por grandes empresas do mercado nacional e internacional</h2>
-          <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-gray-50">Tradição e confiança de grandes nomes no mercado</p>
-          {/* <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-400">Preencha os campos abaixo para que possamos te conhecer melhor e entender a demanda de seu consultório.</p> */}
-          <section className='grid grid-cols-4 h-min items-center gap-4'>
+  return (
+    <section className="space-y-8">
+      <div className="mx-auto max-w-3xl text-center">
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-300">Confianca de mercado</p>
+        <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">
+          Empresas lideres confiam na engenharia da VF Brasil
+        </h2>
+        <p className="mt-5 text-sm leading-7 text-slate-300 sm:text-base">
+          Atuamos com padrao tecnico elevado em projetos e manutencoes de diferentes segmentos industriais.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+        {clients.map((client) => (
+          <div
+            key={client.alt}
+            className="surface-panel group flex min-h-[108px] items-center justify-center rounded-2xl p-4 transition hover:-translate-y-1"
+          >
             <Image
-              src={gerdauLogo}
-              alt="Mockup Demonstrativa - MacBook Pro 16" />
-            <div className='max-w-80'>
-              <Image
-                src={sinobrasLogo}
-                className='object-contain'
-                alt="Mockup Demonstrativa - MacBook Pro 16" />
-            </div>
-              <Image
-                src={votorantimLogo}
-                className='object-contain'
-                alt="Mockup Demonstrativa - MacBook Pro 16" />
-              <Image
-                src={acerosLogo}
-                className='object-contain'
-                alt="Mockup Demonstrativa - MacBook Pro 16" />
-          </section>
-        </div>
-        </section>
-    )
+              src={client.src}
+              alt={client.alt}
+              className="h-auto max-h-12 w-auto object-contain opacity-85 grayscale transition duration-300 group-hover:opacity-100 group-hover:grayscale-0"
+            />
+          </div>
+        ))}
+      </div>
+    </section>
+  )
 }
+
+

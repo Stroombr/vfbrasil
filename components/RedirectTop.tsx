@@ -1,22 +1,55 @@
 "use client"
 
+import { useEffect, useMemo, useState } from 'react'
 import { ArrowUp } from 'phosphor-react'
 
 export function RedirectTop() {
-    return (
-        <div
-            className='fixed right-4 bottom-8 bg-yellow-500 p-4 rounded-[50%] hover:cursor-pointer'
-            onClick={
-                () => {
-                    scrollTo(
-                        {
-                            top: 0, behavior: "smooth"
-                        }
-                    )
-                }
-            }
-        >
-            <ArrowUp size={24} weight="bold" color='white' />
-        </div>
-    )
+  const [visible, setVisible] = useState(false)
+  const [progress, setProgress] = useState(0)
+
+  useEffect(() => {
+    const update = () => {
+      const scrollTop = window.scrollY
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight
+      const ratio = docHeight > 0 ? Math.min((scrollTop / docHeight) * 100, 100) : 0
+
+      setVisible(scrollTop > 300)
+      setProgress(ratio)
+    }
+
+    update()
+    window.addEventListener('scroll', update, { passive: true })
+
+    return () => window.removeEventListener('scroll', update)
+  }, [])
+
+  const ringStyle = useMemo(
+    () => ({
+      background: `conic-gradient(#f4b73f ${progress}%, rgba(255,255,255,0.2) ${progress}% 100%)`,
+    }),
+    [progress],
+  )
+
+  return (
+    <button
+      type="button"
+      className={`focus-ring fixed bottom-23 right-4 z-40 inline-flex h-13 w-13 items-center justify-center rounded-full p-[2px] shadow-[0_12px_30px_rgba(0,0,0,0.35)] transition-all duration-300 sm:bottom-6 sm:right-6 ${
+        visible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-5 opacity-0'
+      }`}
+      style={ringStyle}
+      onClick={() => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        })
+      }}
+      aria-label="Voltar ao topo"
+    >
+      <span className="theme-scroll-button inline-flex h-full w-full items-center justify-center rounded-full border border-white/15 text-amber-300 transition">
+        <ArrowUp size={18} weight="bold" />
+      </span>
+    </button>
+  )
 }
+
+

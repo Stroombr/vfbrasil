@@ -1,54 +1,169 @@
-import Link from "next/link"
+"use client"
 
-const navbarItems = [
-    {
-        name: 'Sobre nós',
-        url: '/sobre'
-    },
-    // {
-    //     name: 'Ajuda',
-    //     url: '/help'
-    // },
-    /*{
-        name: 'Extras',
-        url: '/#'
-    },*/
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useEffect, useMemo, useState } from 'react'
+
+type NavbarItemsStandardProps = {
+  onNavigate?: () => void
+}
+
+type NavItem = {
+  name: string
+  url: string
+  sectionId?: string
+}
+
+const navbarItems: NavItem[] = [
+  { name: 'Home', url: '/' },
+  { name: 'Sobre', url: '/sobre' },
+  { name: 'Empresa', url: '/#overview', sectionId: 'overview' },
+  { name: 'Servicos', url: '/#servicos', sectionId: 'servicos' },
+  { name: 'Produtos', url: '/#produtos', sectionId: 'produtos' },
+  { name: 'Cards', url: '/#cards', sectionId: 'cards' },
+  { name: 'FAQ', url: '/#faq', sectionId: 'faq' },
+  { name: 'Contato', url: '/#contato', sectionId: 'contato' },
 ]
 
-export function NavbarItemsLarge() {
-    return (
-        <ul className="hidden lg:flex lg:gap-x-12">
-            <li>
-                <Link href={'/'} className="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-50 hover:border-1 hover:border-b hover:border-b-yellow-700">Home</Link>
-            </li>
-            {
-                navbarItems.map((item, acc) => {
-                    return (
-                        <li key={acc}>
-                            <Link href={item.url} className="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-50 hover:border-1 hover:border-b hover:border-b-yellow-700">{item.name}</Link>
-                        </li>
-                    )
-                })
-            }
-        </ul>
-    )
+const trackableSections = ['overview', 'servicos', 'produtos', 'cards', 'faq', 'contato'] as const
+
+function getActiveSectionFromScroll() {
+  if (typeof window === 'undefined') {
+    return 'home'
+  }
+
+  if (window.scrollY < 140) {
+    return 'home'
+  }
+
+  const marker = window.scrollY + 180
+  let active: string = 'home'
+
+  for (const id of trackableSections) {
+    const element = document.getElementById(id)
+
+    if (!element) {
+      continue
+    }
+
+    const top = element.getBoundingClientRect().top + window.scrollY
+
+    if (top <= marker) {
+      active = id
+    }
+  }
+
+  return active
 }
 
-export function NavbarItemsStandard() {
-    return (
-        <ul className="gap-y-2 py-6">
-            <li>
-                <Link href={'/'} className="text-base font-semibold leading-7 py-2 text-gray-900 dark:text-gray-50">Home</Link>
-            </li>
-            {
-                navbarItems.map((item, acc) => {
-                    return (
-                        <li key={acc} >
-                            <Link href={item.url} className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 dark:text-gray-50">{item.name}</Link>
-                        </li>
-                    )
-                })
-            }
-        </ul >
-    )
+function useActiveSection(pathname: string) {
+  const [activeSection, setActiveSection] = useState('home')
+
+  useEffect(() => {
+    if (pathname !== '/') {
+      return
+    }
+
+    let frame = 0
+
+    const update = () => {
+      window.cancelAnimationFrame(frame)
+      frame = window.requestAnimationFrame(() => {
+        setActiveSection(getActiveSectionFromScroll())
+      })
+    }
+
+    update()
+
+    window.addEventListener('scroll', update, { passive: true })
+    window.addEventListener('resize', update)
+    window.addEventListener('hashchange', update)
+
+    return () => {
+      window.cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', update)
+      window.removeEventListener('resize', update)
+      window.removeEventListener('hashchange', update)
+    }
+  }, [pathname])
+
+  return activeSection
 }
+
+function useNavItems() {
+  const pathname = usePathname()
+  const activeSection = useActiveSection(pathname)
+
+  return useMemo(
+    () =>
+      navbarItems.map((item) => {
+        const isHome = item.url === '/'
+        const isHashSection = Boolean(item.sectionId)
+
+        let isActive = false
+
+        if (isHome) {
+          isActive = pathname === '/' && activeSection === 'home'
+        } else if (isHashSection) {
+          isActive = pathname === '/' && activeSection === item.sectionId
+        } else {
+          isActive = pathname.startsWith(item.url)
+        }
+
+        return { ...item, isActive }
+      }),
+    [activeSection, pathname],
+  )
+}
+
+export function NavbarItemsLarge() {
+  const items = useNavItems()
+
+  return (
+    <ul className="flex items-center gap-8">
+      {items.map((item) => (
+        <li key={item.url}>
+          <Link
+            href={item.url}
+            aria-current={item.isActive ? 'page' : undefined}
+            className={`focus-ring relative text-sm font-semibold tracking-wide transition ${
+              item.isActive ? 'text-amber-300' : 'text-slate-100 hover:text-amber-300'
+            }`}
+          >
+            {item.name}
+            <span
+              className={`absolute -bottom-1 left-0 h-[2px] bg-amber-300 transition-all ${
+                item.isActive ? 'w-full' : 'w-0'
+              }`}
+            />
+          </Link>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+export function NavbarItemsStandard({ onNavigate }: NavbarItemsStandardProps) {
+  const items = useNavItems()
+
+  return (
+    <ul className="space-y-2">
+      {items.map((item) => (
+        <li key={item.url}>
+          <Link
+            href={item.url}
+            onClick={onNavigate}
+            aria-current={item.isActive ? 'page' : undefined}
+            className={`focus-ring block rounded-lg px-3 py-2 text-base font-semibold transition ${
+              item.isActive ? 'bg-white/15 text-amber-300' : 'text-slate-100 hover:bg-white/10 hover:text-amber-300'
+            }`}
+          >
+            {item.name}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+

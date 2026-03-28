@@ -1,9 +1,5 @@
-import { EnhancedCarousel } from "./Carousel";
+import { EnhancedCarousel } from './Carousel'
 
 export function ServicesHighlight() {
-    return (
-        <>
-            <EnhancedCarousel />
-        </>
-    )
+  return <EnhancedCarousel />
 }

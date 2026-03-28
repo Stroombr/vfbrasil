@@ -1,114 +1,121 @@
-import Link from "next/link"
-import { InstagramLogo, LinkedinLogo, TwitterLogo } from "phosphor-react";
-import vfLogo from './../public/vflogo.png'
-import Image from "next/image";
+"use client"
 
+import Link from 'next/link'
+import Image from 'next/image'
+import { LinkedinLogo } from 'phosphor-react'
+import { ArrowRight } from 'lucide-react'
+
+import vfLogo from './../public/vflogo.png'
+import { buildWhatsappLink, companyLocations, companyProfile } from '@/data/company'
+
+const institutionalLinks = [
+  { name: 'Empresa', href: '/#overview' },
+  { name: 'Servicos', href: '/#servicos' },
+  { name: 'Contato', href: '/#contato' },
+]
 
 export function Footer() {
-    return (
-        <footer className="bg-white dark:bg-gray-900 w-full mx-auto">
-            <div className="mx-auto max-w-7xl space-y-8 px-4 py-12 sm:px-6 lg:space-y-16 lg:px-8">
-                <div className="sm:flex sm:items-center sm:justify-between">
-                    <Link href={"/"} className="-m-1.5 p-1.5 font-bold text-yellow-500">
-                        <Image
-                            src={vfLogo}
-                            alt="Mockup Demonstrativa - MacBook Pro 16" />
-                    </Link>
-                    <ul className="mt-8 flex justify-start gap-6 sm:mt-0 sm:justify-end">
-                        <li>
-                            <Link
-                                href="https://www.linkedin.com/company/vf-do-brasil-ltda/"
-                                rel="noreferrer"
-                                target="_blank"
-                                className="text-yellow-700 transition hover:opacity-75"
-                            >
-                                <span className="sr-only">LinkedIn</span>
-                                <LinkedinLogo className="h-8 w-8 fill-transparent stroke-yellow-700 hover:stroke-white hover:fill-yellow-700"/>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                href="/"
-                                rel="noreferrer"
-                                target="_blank"
-                                className="text-yellow-700 transition hover:opacity-75"
-                            >
-                                <span className="sr-only">Instagram</span>
-                                <InstagramLogo className="h-8 w-8 fill-transparent stroke-yellow-700 hover:stroke-white hover:fill-yellow-700" />
-                            </Link>
-                        </li>
+  return (
+    <footer className="theme-footer border-t border-white/10">
+      <div className="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+        <div className="surface-panel mb-10 flex flex-col items-start justify-between gap-4 rounded-2xl p-5 sm:flex-row sm:items-center">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-300">Atendimento imediato</p>
+            <p className="mt-2 text-sm text-slate-300">Converse com a equipe comercial e receba direcionamento tecnico.</p>
+          </div>
+          <Link
+            href={buildWhatsappLink(`Ola, gostaria de falar com a equipe da ${companyProfile.brandName}.`)}
+            target="_blank"
+            rel="noreferrer"
+            className="focus-ring inline-flex items-center gap-2 rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-emerald-950 transition hover:bg-emerald-400"
+          >
+            Falar no WhatsApp
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
 
-                        <li>
-                            <Link
-                                href="/"
-                                rel="noreferrer"
-                                target="_blank"
-                                className="text-yellow-700 transition hover:opacity-75"
-                            >
-                                <span className="sr-only">Twitter</span>
-                                <TwitterLogo className="h-8 w-8 stroke-none outline-yellow-700 fill-yellow-700 transition hover:opacity-90" />
-                            </Link>
-                        </li>
-                    </ul>
-                </div>
-                <div className="grid grid-cols-1 gap-8 border-t border-gray-100 pt-8 sm:grid-cols-2 lg:grid-cols-3 lg:pt-16 dark:border-gray-700">
+        <div className="grid gap-10 md:grid-cols-[1.1fr_0.8fr_1fr_1fr]">
+          <div>
+            <Link href="/" className="focus-ring inline-flex items-center">
+              <Image src={vfLogo} alt="Logo da VF Brasil" className="h-11 w-auto" />
+            </Link>
+            <p className="mt-5 max-w-sm text-sm leading-7 text-slate-300">{companyProfile.servicesSummary}</p>
+            <p className="mt-4 text-xs uppercase tracking-[0.16em] text-slate-400">Setor: {companyProfile.industry}</p>
+          </div>
 
-                    <div>
-                        <p className="font-medium text-yellow-700">Institucional</p>
-                        <ul className="mt-6 space-y-4 text-sm">
-                            <li>
-                                <Link href="/sobre" className="text-gray-700 transition hover:opacity-75 dark:text-gray-300">
-                                    Sobre nós
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/sobre" className="text-gray-700 transition hover:opacity-75 dark:text-gray-300">
-                                    #TimeLutea
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <p className="font-medium text-yellow-700">Contato</p>
-                        <ul className="mt-6 space-y-4 text-sm">
-                            <li>
-                                <Link href="#" className="text-gray-700 transition hover:opacity-75 dark:text-gray-300">
-                                    Fale Conosco
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="#" className="text-gray-700 transition hover:opacity-75 dark:text-gray-300">
-                                    Facebook
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="#" className="text-gray-700 transition hover:opacity-75 dark:text-gray-300">
-                                    Instagram
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="#" className="text-gray-700 transition hover:opacity-75 dark:text-gray-300">
-                                    Twitter
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <p className="font-medium text-yellow-700">Ajuda</p>
-                        <ul className="mt-6 space-y-4 text-sm">
-                            <li>
-                                <Link href="/help" className="text-gray-700 transition hover:opacity-75 dark:text-gray-300">
-                                    Perguntas Frequentes
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
+          <div>
+            <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-amber-300">Navegacao</h3>
+            <ul className="mt-4 space-y-3">
+              {institutionalLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="focus-ring text-sm text-slate-300 transition hover:text-white">
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-                </div>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
-                    &copy; 2026. VF Brasil Comercio e Serviços Ltda - ME - Várzea Paulista SP. Todos os direitos reservados. Av. Rio Jundiaí, 300 - Várzea Paulista - SP
-                </p>
+          <div>
+            <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-amber-300">Contato</h3>
+            <div className="mt-4 space-y-3 text-sm text-slate-300">
+              <p>Telefone: {companyProfile.phoneDisplay}</p>
+              <p>Porte: {companyProfile.companySize}</p>
+              <p>Fundada em: {companyProfile.foundedYear}</p>
+              <Link
+                href={buildWhatsappLink(`Ola, gostaria de falar com a equipe da ${companyProfile.brandName}.`)}
+                target="_blank"
+                rel="noreferrer"
+                className="focus-ring inline-flex rounded-lg border border-white/20 bg-white/5 px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-emerald-300 transition hover:bg-white/10"
+              >
+                Atendimento via WhatsApp
+              </Link>
             </div>
-        </footer>
-    )
+
+            <div className="mt-5 flex items-center gap-3">
+              <Link
+                href={companyProfile.linkedinCompanyUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="focus-ring rounded-lg border border-white/15 bg-white/5 p-2 text-amber-300 transition hover:bg-white/10"
+                aria-label="LinkedIn da VF Brasil"
+              >
+                <LinkedinLogo className="h-5 w-5" />
+              </Link>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-amber-300">Unidades</h3>
+            <div className="mt-4 space-y-4">
+              {companyLocations.map((location) => (
+                <article key={location.name}>
+                  <p className="text-sm font-semibold text-white">{location.name}</p>
+                  <p className="mt-1 text-xs leading-6 text-slate-300">
+                    {location.address}
+                    <br />
+                    {location.cityState} - CEP {location.zipCode}
+                  </p>
+                  <Link
+                    href={location.mapsUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="focus-ring mt-2 inline-flex text-[11px] font-semibold uppercase tracking-[0.14em] text-amber-300 transition hover:text-amber-200"
+                  >
+                    Ver rota
+                  </Link>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-10 border-t border-white/10 pt-6 text-xs text-slate-400">
+          (c) 2026 {companyProfile.legalName}. Todos os direitos reservados.
+        </div>
+      </div>
+    </footer>
+  )
 }
+
+
