@@ -20,7 +20,15 @@ export function SectionReveal({ children, className = '', delayMs = 0 }: Section
       return
     }
 
-    const observer = new IntersectionObserver(
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
+      const timer = window.setTimeout(() => {
+        setVisible(true)
+      }, 0)
+
+      return () => window.clearTimeout(timer)
+    }
+
+    const observer = new window.IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setVisible(true)

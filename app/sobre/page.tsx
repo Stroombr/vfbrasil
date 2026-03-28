@@ -137,7 +137,7 @@ export default function AboutPage() {
             <div className="max-w-3xl space-y-7">
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-300">Sobre nos</p>
               <h1 className="text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
-                Estrutura tecnica para sustentar operacoes industriais de alta exigencia.
+                Estrutura tecnica e comercial para operacoes industriais criticas.
               </h1>
               <p className="text-base leading-8 text-slate-200 sm:text-lg">{companyProfile.overview}</p>
               <p className="max-w-2xl text-sm leading-7 text-slate-300 sm:text-base">
@@ -149,7 +149,7 @@ export default function AboutPage() {
                   href="/#contato"
                   className="focus-ring inline-flex items-center gap-2 rounded-xl bg-amber-500 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-amber-400"
                 >
-                  Falar com a equipe
+                  Solicitar proposta
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link

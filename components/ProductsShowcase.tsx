@@ -174,10 +174,10 @@ export function ProductsShowcase() {
     <section id="produtos" className="mx-auto w-full max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
       <div className="surface-panel rounded-3xl p-6 sm:p-10">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-300">Linha de produtos</p>
-          <h2 className="mt-4 text-2xl font-semibold text-white sm:text-4xl">Aba de produtos com foco tecnico e comercial</h2>
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-300">Produtos e solucoes</p>
+          <h2 className="mt-4 text-2xl font-semibold text-white sm:text-4xl">Escopos de fabricacao e engenharia prontos para cotar</h2>
           <p className="mt-5 text-sm leading-7 text-slate-300 sm:text-base">
-            Selecione a categoria, compare opcoes e avance direto para cotacao com nossa equipe.
+            Selecione a categoria, compare opcoes e avance para proposta tecnica-comercial.
           </p>
         </div>
 
@@ -216,6 +216,9 @@ export function ProductsShowcase() {
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-300">Detalhes do produto</p>
               <h3 className="mt-3 text-2xl font-semibold text-white">{selectedProduct.name}</h3>
               <p className="mt-3 text-sm leading-7 text-slate-300">{selectedProduct.summary}</p>
+              <p className="mt-4 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-slate-200">
+                Prazo estimado: {selectedProduct.leadTime}
+              </p>
 
               <div className="mt-5 rounded-xl border border-white/10 bg-white/5 p-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-300">Especificacoes principais</p>
@@ -248,7 +251,7 @@ export function ProductsShowcase() {
                   href="#contato"
                   className="focus-ring inline-flex w-full items-center justify-center rounded-xl bg-amber-500 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-amber-400"
                 >
-                  Solicitar cotacao deste produto
+                  Solicitar proposta deste escopo
                 </Link>
                 <Link
                   href={buildWhatsappLink(`Ola, gostaria de cotar o produto: ${selectedProduct.name}.`)}

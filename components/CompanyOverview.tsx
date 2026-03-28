@@ -2,14 +2,20 @@ import Link from 'next/link'
 
 import { companyLocations, companyProfile } from '@/data/company'
 
+const commercialCommitments = [
+  'Escopo tecnico detalhado antes da execucao',
+  'Acompanhamento de prazo e marcos de entrega',
+  'Suporte tecnico durante implantacao e pos-entrega',
+]
+
 export function CompanyOverview() {
   return (
     <section id="overview" className="mx-auto w-full max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
-      <div className="surface-panel rounded-3xl p-8 sm:p-10">
+      <div className="surface-panel rounded-3xl p-6 sm:p-10">
         <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
           <div className="space-y-5">
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-300">Overview</p>
-            <h2 className="text-3xl font-semibold text-white sm:text-4xl">Empresa</h2>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-300">Sobre a VF Brasil</p>
+            <h2 className="text-2xl font-semibold text-white sm:text-4xl">Estrutura tecnica para entrega com previsibilidade</h2>
             <p className="text-sm leading-7 text-slate-300 sm:text-base">{companyProfile.overview}</p>
             <p className="text-sm leading-7 text-slate-300 sm:text-base">{companyProfile.servicesSummary}</p>
 
@@ -20,10 +26,21 @@ export function CompanyOverview() {
                 </span>
               ))}
             </div>
+
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-4 sm:p-5">
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-amber-300">Compromissos comerciais</p>
+              <div className="mt-3 space-y-2">
+                {commercialCommitments.map((item) => (
+                  <p key={item} className="text-sm leading-7 text-slate-300">
+                    {item}
+                  </p>
+                ))}
+              </div>
+            </div>
           </div>
 
           <div className="space-y-4 rounded-2xl border border-white/10 bg-[#0a1019]/75 p-5 sm:p-6">
-            <h3 className="text-lg font-semibold text-white">Dados institucionais</h3>
+            <h3 className="text-lg font-semibold text-white">Resumo para decisao</h3>
             <dl className="space-y-3 text-sm">
               <div className="flex items-start justify-between gap-3">
                 <dt className="text-slate-400">Industria</dt>
@@ -47,14 +64,22 @@ export function CompanyOverview() {
               </div>
             </dl>
 
-            <Link
-              href={companyProfile.linkedinCompanyUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="focus-ring inline-flex rounded-lg border border-white/20 bg-white/5 px-4 py-2 text-sm font-semibold text-slate-100 transition hover:bg-white/10"
-            >
-              LinkedIn institucional
-            </Link>
+            <div className="grid gap-2 sm:grid-cols-2">
+              <Link
+                href="/#contato"
+                className="focus-ring inline-flex items-center justify-center rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-amber-400"
+              >
+                Solicitar proposta
+              </Link>
+              <Link
+                href={companyProfile.linkedinCompanyUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="focus-ring inline-flex items-center justify-center rounded-lg border border-white/20 bg-white/5 px-4 py-2 text-sm font-semibold text-slate-100 transition hover:bg-white/10"
+              >
+                LinkedIn institucional
+              </Link>
+            </div>
           </div>
         </div>
 

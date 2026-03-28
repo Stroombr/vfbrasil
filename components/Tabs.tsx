@@ -180,7 +180,7 @@ export default function TabsIndustrial() {
               disabled={isSubmitting}
               className="focus-ring inline-flex items-center gap-2 rounded-lg bg-amber-500 px-5 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-amber-400 disabled:cursor-not-allowed disabled:opacity-70"
             >
-              {isSubmitting ? 'Enviando...' : 'Enviar solicitacao'}
+              {isSubmitting ? 'Enviando...' : 'Solicitar proposta'}
               <Send className="h-4 w-4" />
             </button>
 
@@ -194,9 +194,9 @@ export default function TabsIndustrial() {
         </form>
       ) : (
         <div className="mt-6 rounded-2xl border border-white/15 bg-[#0a1019]/75 p-4 sm:p-6">
-          <h3 className="text-lg font-semibold text-white">Atendimento rapido no WhatsApp</h3>
+          <h3 className="text-lg font-semibold text-white">Atendimento comercial no WhatsApp</h3>
           <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-300">
-            Canal direto para triagem comercial e orientacao dos proximos passos tecnicos.
+            Canal direto para triagem da demanda e orientacao dos proximos passos.
           </p>
           <div className="mt-5 flex flex-wrap items-center gap-3">
             <Link

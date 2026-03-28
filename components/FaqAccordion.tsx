@@ -15,6 +15,11 @@ const faqItems: FaqItem[] = [
       'Sim. A VF Brasil atua nacionalmente com suporte tecnico remoto e presencial, de acordo com a criticidade e o escopo da operacao.',
   },
   {
+    question: 'Como funciona a proposta tecnico-comercial?',
+    answer:
+      'Iniciamos com triagem do contexto, definimos escopo preliminar e enviamos proposta com etapas, premissas e prazo de execucao.',
+  },
+  {
     question: 'A equipe apoia nacionalizacao de pecas importadas?',
     answer:
       'Sim. Fazemos estudo tecnico, engenharia reversa quando necessario e validacao de desempenho para manter confiabilidade operacional.',
@@ -28,6 +33,11 @@ const faqItems: FaqItem[] = [
     question: 'A VF Brasil executa manutencao preventiva e corretiva?',
     answer:
       'Executamos ambos os modelos, com planejamento orientado por risco e foco em disponibilidade, seguranca e produtividade da linha.',
+  },
+  {
+    question: 'Existe suporte apos entrega e implantacao?',
+    answer:
+      'Sim. Mantemos acompanhamento tecnico para estabilizacao operacional, ajustes e orientacao de melhoria continua.',
   },
 ]
 
@@ -53,7 +63,7 @@ export function FaqAccordion() {
       <div className="surface-panel rounded-3xl p-8 sm:p-10">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-300">Perguntas frequentes</p>
-          <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">Respostas rapidas para acelerar sua decisao</h2>
+          <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">Respostas objetivas para apoiar sua contratacao</h2>
         </div>
 
         <div className="mx-auto mt-6 max-w-2xl">

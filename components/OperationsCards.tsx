@@ -96,10 +96,9 @@ export function OperationsCards() {
     <section id="cards" className="mx-auto w-full max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
       <div className="surface-panel rounded-3xl p-6 sm:p-10">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-300">Cards interativos</p>
-          <h2 className="mt-4 text-2xl font-semibold text-white sm:text-4xl">Selecione o cenario da sua operacao</h2>
+          <h2 className="mt-4 text-2xl font-semibold text-white sm:text-4xl">Selecione o desafio para receber a resposta recomendada</h2>
           <p className="mt-5 text-sm leading-7 text-slate-300 sm:text-base">
-            Clique em um card para visualizar uma resposta tecnica recomendada e acionar o atendimento da equipe.
+            Escolha um cenario, veja o plano de resposta e avance para contato tecnico-comercial.
           </p>
         </div>
 

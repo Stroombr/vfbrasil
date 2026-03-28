@@ -233,10 +233,10 @@ export function EnhancedCarousel() {
   return (
     <div id="servicos" className="space-y-8">
       <div className="mx-auto max-w-3xl text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-300">Nossos servicos</p>
-        <h2 className="mt-4 text-2xl font-semibold text-white sm:text-4xl">Cobertura completa para cada etapa da operacao</h2>
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-300">Solucoes de engenharia</p>
+        <h2 className="mt-4 text-2xl font-semibold text-white sm:text-4xl">Servicos para disponibilidade, prazo e confiabilidade</h2>
         <p className="mt-5 text-sm leading-7 text-slate-300 sm:text-base">
-          Equipes multidisciplinares e engenharia aplicada para performance, seguranca operacional e previsibilidade.
+          Equipes multidisciplinares para diagnosticar, executar e acompanhar ganhos em operacoes criticas.
         </p>
       </div>
 

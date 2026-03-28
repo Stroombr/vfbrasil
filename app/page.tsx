@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Link from 'next/link'
 import { BadgeCheck, CheckCircle2, Clock3, Factory, FileCheck2, Handshake, ShieldCheck } from 'lucide-react'
 
@@ -22,7 +22,7 @@ const sectionShell = 'mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8'
 
 export const metadata: Metadata = {
   title: 'Home',
-  description: 'VF Brasil: engenharia industrial para siderurgia com foco em produtividade, seguranca e prazo.',
+  description: 'Solucoes industriais da VF Brasil para reduzir paradas, aumentar disponibilidade e executar com prazo.',
 }
 
 const highlights = [
@@ -34,25 +34,25 @@ const highlights = [
 const differentiators = [
   {
     icon: Clock3,
-    title: 'Resposta rapida',
-    description: 'Triagem tecnica e comercial com retorno objetivo para acelerar decisoes.',
+    title: 'Resposta comercial rapida',
+    description: 'Retorno inicial com direcionamento tecnico para voce decidir com velocidade.',
   },
   {
     icon: Factory,
-    title: 'Execucao confiavel',
-    description: 'Padrao de engenharia aplicado a fabricacao, manutencao e suporte de campo.',
+    title: 'Execucao com padrao industrial',
+    description: 'Engenharia, fabricacao e campo com controle de qualidade e rastreabilidade.',
   },
   {
     icon: ShieldCheck,
-    title: 'Foco em resultado',
-    description: 'Planos orientados para reduzir paradas e elevar disponibilidade operacional.',
+    title: 'Foco em disponibilidade',
+    description: 'Escopos orientados para reduzir parada, risco operacional e custo de urgencia.',
   },
 ]
 
 const trustBadges = [
-  'Fundada em 2015',
+  'Retorno inicial em ate 1 dia util',
+  'Atendimento nacional onsite e remoto',
   'Equipe tecnica especializada',
-  'Atendimento onsite e remoto',
 ]
 
 const deliveryFlow = [
@@ -73,6 +73,24 @@ const deliveryFlow = [
   },
 ]
 
+const commercialOffers = [
+  {
+    title: 'Diagnostico + plano de acao',
+    description: 'Levantamento tecnico com prioridades, riscos e cronograma inicial para decisao rapida.',
+    result: 'Entrega inicial com escopo tecnico estruturado',
+  },
+  {
+    title: 'Fabricacao e nacionalizacao',
+    description: 'Pecas, subconjuntos e dispositivos com engenharia aplicada para reduzir dependencia de importados.',
+    result: 'Menor lead time e maior previsibilidade de reposicao',
+  },
+  {
+    title: 'Implantacao e suporte em campo',
+    description: 'Montagem, comissionamento e acompanhamento tecnico para estabilizar a operacao com seguranca.',
+    result: 'Partida mais segura e ganho de disponibilidade',
+  },
+]
+
 export default function Home() {
   return (
     <>
@@ -85,14 +103,14 @@ export default function Home() {
           <div className={`${sectionShell} hero-on-photo grid gap-7 pt-2 sm:gap-10 sm:pt-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-end`}>
             <div className="max-w-3xl space-y-5 sm:space-y-7">
               <span className="hero-chip inline-flex rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em]">
-                Engenharia industrial para siderurgia
+                Solucoes industriais para siderurgia
               </span>
               <h1 className="hero-title max-w-3xl text-3xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
-                Solucoes com confianca, qualidade e durabilidade.
+                Reduza paradas e ganhe previsibilidade operacional.
               </h1>
               <p className="hero-copy max-w-2xl text-base leading-7 text-slate-200 sm:text-lg sm:leading-8">
-                Projetamos e executamos engenharia reversa, fabricacao de maquinas e melhoria de processos para
-                aumentar disponibilidade e reduzir paradas.
+                A VF Brasil integra engenharia reversa, fabricacao e suporte tecnico para entregar performance com
+                prazo, qualidade e acompanhamento.
               </p>
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
                 <Link
@@ -128,8 +146,8 @@ export default function Home() {
         <SectionReveal delayMs={20}>
           <section className={`${sectionShell} pb-12 pt-16`}>
             <div className="mx-auto max-w-3xl text-center">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-300">Diferenciais</p>
-              <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">Base tecnica para decisoes e execucao segura</h2>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-300">Por que contratar</p>
+              <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">Proposta objetiva para decisao comercial</h2>
             </div>
 
             <div className="mt-8 grid gap-4 md:grid-cols-3">
@@ -147,6 +165,47 @@ export default function Home() {
           </section>
         </SectionReveal>
 
+        <SectionReveal delayMs={30}>
+          <section className={`${sectionShell} pb-12`}>
+            <div className="surface-panel rounded-3xl p-6 sm:p-10">
+              <div className="mx-auto max-w-3xl text-center">
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-300">Escopos comerciais</p>
+                <h2 className="mt-4 text-2xl font-semibold text-white sm:text-4xl">Opcoes prontas para iniciar sua demanda</h2>
+                <p className="mt-5 text-sm leading-7 text-slate-300 sm:text-base">
+                  Escolha o modelo de atendimento e avance para proposta com escopo claro.
+                </p>
+              </div>
+
+              <div className="mt-8 grid gap-4 md:grid-cols-3">
+                {commercialOffers.map((offer) => (
+                  <article key={offer.title} className="rounded-2xl border border-white/10 bg-white/5 p-5">
+                    <h3 className="text-lg font-semibold text-white">{offer.title}</h3>
+                    <p className="mt-3 text-sm leading-7 text-slate-300">{offer.description}</p>
+                    <p className="mt-4 rounded-lg border border-emerald-400/25 bg-emerald-500/10 px-3 py-2 text-xs font-semibold text-emerald-300">
+                      Resultado esperado: {offer.result}
+                    </p>
+                  </article>
+                ))}
+              </div>
+
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
+                <Link
+                  href="#contato"
+                  className="focus-ring inline-flex items-center justify-center rounded-xl bg-amber-500 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-amber-400"
+                >
+                  Solicitar proposta comercial
+                </Link>
+                <Link
+                  href="#produtos"
+                  className="focus-ring inline-flex items-center justify-center rounded-xl border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-slate-100 transition hover:bg-white/10"
+                >
+                  Ver produtos e solucoes
+                </Link>
+              </div>
+            </div>
+          </section>
+        </SectionReveal>
+
         <SectionReveal>
           <CompanyOverview />
         </SectionReveal>
@@ -157,7 +216,7 @@ export default function Home() {
               <div className="mx-auto max-w-3xl text-center">
                 <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-300">Metodo de entrega</p>
                 <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">
-                  Processo claro do diagnostico ao resultado em campo
+                  Processo claro da proposta ao resultado em campo
                 </h2>
               </div>
 
@@ -214,10 +273,10 @@ export default function Home() {
               <div className="mx-auto max-w-3xl text-center">
                 <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-300">Fale com especialistas</p>
                 <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">
-                  Atendimento tecnico e comercial
+                  Solicite sua proposta com atendimento tecnico-comercial
                 </h2>
                 <p className="mt-5 text-sm leading-7 text-slate-300 sm:text-base">
-                  Envie seu desafio e retornaremos com direcionamento tecnico objetivo para sua operacao.
+                  Envie seu desafio, prazo e contexto operacional. Retornamos com encaminhamento objetivo.
                 </p>
               </div>
               <Tabs />

@@ -10,7 +10,10 @@ import { buildWhatsappLink, companyLocations, companyProfile } from '@/data/comp
 
 const institutionalLinks = [
   { name: 'Empresa', href: '/#overview' },
-  { name: 'Servicos', href: '/#servicos' },
+  { name: 'Solucoes', href: '/#servicos' },
+  { name: 'Produtos', href: '/#produtos' },
+  { name: 'Cenarios', href: '/#cards' },
+  { name: 'FAQ', href: '/#faq' },
   { name: 'Contato', href: '/#contato' },
 ]
 
@@ -20,8 +23,10 @@ export function Footer() {
       <div className="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="surface-panel mb-10 flex flex-col items-start justify-between gap-4 rounded-2xl p-5 sm:flex-row sm:items-center">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-300">Atendimento imediato</p>
-            <p className="mt-2 text-sm text-slate-300">Converse com a equipe comercial e receba direcionamento tecnico.</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-300">Pronto para avancar</p>
+            <p className="mt-2 text-sm text-slate-300">
+              Fale com nossa equipe e receba proposta tecnico-comercial para sua operacao.
+            </p>
           </div>
           <Link
             href={buildWhatsappLink(`Ola, gostaria de falar com a equipe da ${companyProfile.brandName}.`)}
@@ -57,11 +62,12 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-amber-300">Contato</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-amber-300">Comercial</h3>
             <div className="mt-4 space-y-3 text-sm text-slate-300">
               <p>Telefone: {companyProfile.phoneDisplay}</p>
               <p>Porte: {companyProfile.companySize}</p>
               <p>Fundada em: {companyProfile.foundedYear}</p>
+              <p>Modelo de atendimento: {companyProfile.workplacePolicy}</p>
               <Link
                 href={buildWhatsappLink(`Ola, gostaria de falar com a equipe da ${companyProfile.brandName}.`)}
                 target="_blank"
@@ -111,7 +117,7 @@ export function Footer() {
         </div>
 
         <div className="mt-10 border-t border-white/10 pt-6 text-xs text-slate-400">
-          (c) 2026 {companyProfile.legalName}. Todos os direitos reservados.
+          (c) 2026 {companyProfile.legalName}. Solucoes industriais para produtividade e confiabilidade operacional.
         </div>
       </div>
     </footer>

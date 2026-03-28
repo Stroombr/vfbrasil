@@ -16,13 +16,24 @@ export function ClientList() {
   return (
     <section className="space-y-8">
       <div className="mx-auto max-w-3xl text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-300">Confianca de mercado</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-300">Prova de confianca</p>
         <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">
-          Empresas lideres confiam na engenharia da VF Brasil
+          Empresas lideres ja operam com suporte tecnico da VF Brasil
         </h2>
         <p className="mt-5 text-sm leading-7 text-slate-300 sm:text-base">
-          Atuamos com padrao tecnico elevado em projetos e manutencoes de diferentes segmentos industriais.
+          Relacao de longo prazo com foco em disponibilidade, qualidade e cumprimento de escopo.
         </p>
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+          <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-semibold text-slate-200">
+            Projetos industriais criticos
+          </span>
+          <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-semibold text-slate-200">
+            Atendimento nacional
+          </span>
+          <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-semibold text-slate-200">
+            Suporte tecnico dedicado
+          </span>
+        </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">

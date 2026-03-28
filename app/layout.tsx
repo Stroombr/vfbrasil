@@ -44,13 +44,21 @@ export const metadata: Metadata = {
     default: 'VF Brasil',
     template: '%s | VF Brasil',
   },
-  description: 'Solucoes industriais com engenharia aplicada, confiabilidade e performance operacional.',
+  description: 'VF Brasil: engenharia industrial para reduzir paradas, elevar disponibilidade e executar com prazo.',
+  keywords: [
+    'engenharia industrial',
+    'siderurgia',
+    'engenharia reversa',
+    'fabricacao de maquinas',
+    'nacionalizacao de pecas',
+    'manutencao industrial',
+  ],
   openGraph: {
     type: 'website',
     title: 'VF Brasil',
     siteName: 'VF Brasil',
     locale: 'pt_BR',
-    description: 'Engenharia industrial para siderurgia com foco em produtividade, qualidade e seguranca operacional.',
+    description: 'Solucoes tecnicas e comerciais para disponibilidade operacional, prazo e confiabilidade.',
   },
 }
 

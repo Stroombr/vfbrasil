@@ -18,9 +18,9 @@ const navbarItems: NavItem[] = [
   { name: 'Home', url: '/' },
   { name: 'Sobre', url: '/sobre' },
   { name: 'Empresa', url: '/#overview', sectionId: 'overview' },
-  { name: 'Servicos', url: '/#servicos', sectionId: 'servicos' },
+  { name: 'Solucoes', url: '/#servicos', sectionId: 'servicos' },
   { name: 'Produtos', url: '/#produtos', sectionId: 'produtos' },
-  { name: 'Cards', url: '/#cards', sectionId: 'cards' },
+  { name: 'Cenarios', url: '/#cards', sectionId: 'cards' },
   { name: 'FAQ', url: '/#faq', sectionId: 'faq' },
   { name: 'Contato', url: '/#contato', sectionId: 'contato' },
 ]

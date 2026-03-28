@@ -402,6 +402,13 @@ h6 {
   .bg-image-plain {
     background-attachment: scroll;
   }
+
+  .section-reveal,
+  .section-reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 @layer utilities {
