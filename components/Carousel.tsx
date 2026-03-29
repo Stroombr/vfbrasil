@@ -1,7 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { ArrowRight, ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react'
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
 
 type ServiceCategory = 'fabricacao' | 'manutencao' | 'engenharia' | 'implantacao'
 type CategoryFilter = 'todos' | ServiceCategory
@@ -105,7 +105,6 @@ export function EnhancedCarousel() {
   const carouselRef = useRef<HTMLDivElement>(null)
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>('todos')
   const [expandedCard, setExpandedCard] = useState<number | null>(null)
-  const [isAutoplay, setIsAutoplay] = useState(true)
   const [activeIndex, setActiveIndex] = useState(0)
 
   const filteredCards = useMemo(
@@ -180,7 +179,7 @@ export function EnhancedCarousel() {
   }, [])
 
   useEffect(() => {
-    if (!carouselRef.current || !isAutoplay) {
+    if (!carouselRef.current) {
       return
     }
 
@@ -200,7 +199,7 @@ export function EnhancedCarousel() {
     }, 3600)
 
     return () => window.clearInterval(timer)
-  }, [isAutoplay])
+  }, [])
 
   useEffect(() => {
     const node = carouselRef.current
@@ -249,7 +248,6 @@ export function EnhancedCarousel() {
               setActiveCategory(filter)
               setExpandedCard(null)
               setActiveIndex(0)
-              setIsAutoplay(false)
               carouselRef.current?.scrollTo({ left: 0, behavior: 'smooth' })
             }}
             className={`focus-ring rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${
@@ -264,14 +262,6 @@ export function EnhancedCarousel() {
       </div>
 
       <div className="flex flex-wrap items-center justify-start gap-3 sm:justify-end">
-        <button
-          onClick={() => setIsAutoplay((prev) => !prev)}
-          className="focus-ring inline-flex h-10 items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 text-xs font-semibold uppercase tracking-[0.15em] text-white transition hover:bg-white/15"
-          aria-label="Ativar ou pausar rolagem automatica"
-        >
-          {isAutoplay ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
-          {isAutoplay ? 'Pausar auto' : 'Ativar auto'}
-        </button>
         <button
           onClick={() => scroll('left')}
           className="focus-ring inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white transition hover:bg-white/15"
@@ -291,18 +281,14 @@ export function EnhancedCarousel() {
       <div
         ref={carouselRef}
         className="scrollbar-hide flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 sm:gap-6"
-        onMouseEnter={() => setIsAutoplay(false)}
-        onMouseLeave={() => setIsAutoplay(true)}
         onKeyDown={(event) => {
           if (event.key === 'ArrowRight') {
             event.preventDefault()
-            setIsAutoplay(false)
             scroll('right')
           }
 
           if (event.key === 'ArrowLeft') {
             event.preventDefault()
-            setIsAutoplay(false)
             scroll('left')
           }
         }}
@@ -325,10 +311,7 @@ export function EnhancedCarousel() {
           <button
             key={item.id}
             type="button"
-            onClick={() => {
-              setIsAutoplay(false)
-              scrollToCard(index)
-            }}
+            onClick={() => scrollToCard(index)}
             className={`focus-ring h-2.5 rounded-full transition-all ${
               activeIndex === index ? 'w-7 bg-amber-400' : 'w-2.5 bg-white/25 hover:bg-white/40'
             }`}

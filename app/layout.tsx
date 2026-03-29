@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     title: 'VF Brasil',
     siteName: 'VF Brasil',
     locale: 'pt_BR',
-    description: 'Solucoes tecnicas e comerciais para disponibilidade operacional, prazo e confiabilidade.',
+    description: 'Solucoes tecnicas para disponibilidade operacional, prazo e confiabilidade.',
   },
 }
 
@@ -68,31 +68,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning data-theme="dark" className="theme-dark">
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(() => {
-              try {
-                const stored = localStorage.getItem('vf-theme');
-                const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-                const resolved = stored === 'light' || stored === 'dark'
-                  ? stored
-                  : (systemPrefersLight ? 'light' : 'dark');
-                const root = document.documentElement;
-                root.setAttribute('data-theme', resolved);
-                root.classList.remove('theme-light', 'theme-dark');
-                root.classList.add(resolved === 'light' ? 'theme-light' : 'theme-dark');
-              } catch (_) {
-                const root = document.documentElement;
-                root.setAttribute('data-theme', 'dark');
-                root.classList.remove('theme-light');
-                root.classList.add('theme-dark');
-              }
-            })();`,
-          }}
-        />
-      </head>
+    <html lang="pt-BR" data-theme="dark" className="theme-dark">
       <body className={`${heading.variable} ${body.variable} antialiased`}>
         <PageProgressBar />
         <a

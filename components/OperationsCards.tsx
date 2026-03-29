@@ -98,7 +98,7 @@ export function OperationsCards() {
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="mt-4 text-2xl font-semibold text-white sm:text-4xl">Selecione o desafio para receber a resposta recomendada</h2>
           <p className="mt-5 text-sm leading-7 text-slate-300 sm:text-base">
-            Escolha um cenario, veja o plano de resposta e avance para contato tecnico-comercial.
+            Escolha um cenario, veja o plano de resposta e avance para contato tecnico.
           </p>
         </div>
 
@@ -133,7 +133,7 @@ export function OperationsCards() {
                   }`}
                 >
                   <div className="flex items-start justify-between gap-3">
-                    <span className="inline-flex rounded-lg border border-white/20 bg-white/8 p-2 text-amber-300">
+                    <span className="inline-flex rounded-lg border border-white/20 bg-white/10 p-2 text-amber-300">
                       <Icon className="h-5 w-5" />
                     </span>
                     <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-300">{scenario.label}</span>
@@ -194,7 +194,7 @@ export function OperationsCards() {
                 href={whatsappLink}
                 target="_blank"
                 rel="noreferrer"
-                className="focus-ring inline-flex w-full items-center justify-center gap-2 rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-emerald-950 transition hover:bg-emerald-400 sm:w-auto"
+                className="focus-ring inline-flex w-full items-center justify-center gap-2 rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-amber-400 sm:w-auto"
               >
                 Enviar este cenario
               </Link>

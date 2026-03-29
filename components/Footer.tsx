@@ -9,11 +9,9 @@ import vfLogo from './../public/vflogo.png'
 import { buildWhatsappLink, companyLocations, companyProfile } from '@/data/company'
 
 const institutionalLinks = [
+  { name: 'Sobre', href: '/sobre' },
   { name: 'Empresa', href: '/#overview' },
-  { name: 'Solucoes', href: '/#servicos' },
   { name: 'Produtos', href: '/#produtos' },
-  { name: 'Cenarios', href: '/#cards' },
-  { name: 'FAQ', href: '/#faq' },
   { name: 'Contato', href: '/#contato' },
 ]
 
@@ -25,14 +23,14 @@ export function Footer() {
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-300">Pronto para avancar</p>
             <p className="mt-2 text-sm text-slate-300">
-              Fale com nossa equipe e receba proposta tecnico-comercial para sua operacao.
+              Fale com nossa equipe e receba proposta tecnica para sua operacao.
             </p>
           </div>
           <Link
             href={buildWhatsappLink(`Ola, gostaria de falar com a equipe da ${companyProfile.brandName}.`)}
             target="_blank"
             rel="noreferrer"
-            className="focus-ring inline-flex items-center gap-2 rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-emerald-950 transition hover:bg-emerald-400"
+            className="focus-ring inline-flex items-center gap-2 rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-amber-400"
           >
             Falar no WhatsApp
             <ArrowRight className="h-4 w-4" />
@@ -62,17 +60,15 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-amber-300">Comercial</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-amber-300">Contato</h3>
             <div className="mt-4 space-y-3 text-sm text-slate-300">
               <p>Telefone: {companyProfile.phoneDisplay}</p>
-              <p>Porte: {companyProfile.companySize}</p>
-              <p>Fundada em: {companyProfile.foundedYear}</p>
               <p>Modelo de atendimento: {companyProfile.workplacePolicy}</p>
               <Link
                 href={buildWhatsappLink(`Ola, gostaria de falar com a equipe da ${companyProfile.brandName}.`)}
                 target="_blank"
                 rel="noreferrer"
-                className="focus-ring inline-flex rounded-lg border border-white/20 bg-white/5 px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-emerald-300 transition hover:bg-white/10"
+                className="focus-ring inline-flex rounded-lg border border-white/20 bg-white/5 px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-amber-300 transition hover:bg-white/10"
               >
                 Atendimento via WhatsApp
               </Link>

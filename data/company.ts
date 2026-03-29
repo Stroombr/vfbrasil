@@ -27,7 +27,6 @@ export const companyProfile = {
   servicesSummary:
     'Prestacao de servicos em engenharia reversa, fabricacao de maquinas e pecas, dispositivos e suporte tecnico para siderurgia.',
   workplacePolicy: 'Onsite',
-  vaccinePolicy: 'Sem exigencia de vacina',
 } as const
 
 export const companyLocations: CompanyLocation[] = [

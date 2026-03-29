@@ -2,10 +2,11 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { ArrowRight, Factory, PackageCheck, Settings2, Wrench } from 'lucide-react'
 
 import { buildWhatsappLink } from '@/data/company'
+import { usePrefersReducedMotion } from './usePrefersReducedMotion'
 
 type ProductCategory = 'todos' | 'maquinas' | 'pecas' | 'dispositivos' | 'engenharia'
 
@@ -105,6 +106,11 @@ const products: Product[] = [
   },
 ]
 
+const autoCategoryOrder: Exclude<ProductCategory, 'todos'>[] = ['maquinas', 'pecas', 'dispositivos', 'engenharia']
+const autoSequence = autoCategoryOrder.flatMap((category) =>
+  products.filter((product) => product.category === category).map((product) => ({ category, id: product.id })),
+)
+
 function ProductCard({
   product,
   isActive,
@@ -142,8 +148,7 @@ function ProductCard({
       <div className="mt-4 space-y-3">
         <h3 className="text-lg font-semibold text-white">{product.name}</h3>
         <p className="text-sm leading-6 text-slate-300">{product.summary}</p>
-        <div className="flex flex-col items-start gap-3 border-t border-white/10 pt-3 sm:flex-row sm:items-center sm:justify-between">
-          <span className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-300">Lead time: {product.leadTime}</span>
+        <div className="flex flex-col items-start gap-3 border-t border-white/10 pt-3 sm:flex-row sm:items-center">
           <button
             type="button"
             onClick={onSelect}
@@ -160,8 +165,31 @@ function ProductCard({
 }
 
 export function ProductsShowcase() {
-  const [activeCategory, setActiveCategory] = useState<ProductCategory>('todos')
-  const [activeProductId, setActiveProductId] = useState(products[0]?.id ?? '')
+  const [manualCategory, setManualCategory] = useState<ProductCategory>('todos')
+  const [manualProductId, setManualProductId] = useState(products[0]?.id ?? '')
+  const [autoIndex, setAutoIndex] = useState(0)
+  const prefersReducedMotion = usePrefersReducedMotion()
+  const shouldAutoMode = !prefersReducedMotion
+
+  const autoCurrent = autoSequence[autoIndex]
+  const activeCategory: ProductCategory = shouldAutoMode && autoCurrent ? autoCurrent.category : manualCategory
+  const activeProductId = shouldAutoMode && autoCurrent ? autoCurrent.id : manualProductId
+
+  useEffect(() => {
+    if (!shouldAutoMode || autoSequence.length === 0) {
+      return
+    }
+
+    const timer = window.setInterval(() => {
+      if (document.hidden) {
+        return
+      }
+
+      setAutoIndex((prev) => (prev + 1) % autoSequence.length)
+    }, 3600)
+
+    return () => window.clearInterval(timer)
+  }, [shouldAutoMode])
 
   const filteredProducts = useMemo(
     () => (activeCategory === 'todos' ? products : products.filter((product) => product.category === activeCategory)),
@@ -175,9 +203,9 @@ export function ProductsShowcase() {
       <div className="surface-panel rounded-3xl p-6 sm:p-10">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-300">Produtos e solucoes</p>
-          <h2 className="mt-4 text-2xl font-semibold text-white sm:text-4xl">Escopos de fabricacao e engenharia prontos para cotar</h2>
+          <h2 className="mt-4 text-2xl font-semibold text-white sm:text-4xl">Solucoes de fabricacao e engenharia prontas para cotar</h2>
           <p className="mt-5 text-sm leading-7 text-slate-300 sm:text-base">
-            Selecione a categoria, compare opcoes e avance para proposta tecnica-comercial.
+            Selecione a categoria, compare opcoes e avance para proposta tecnica.
           </p>
         </div>
 
@@ -186,7 +214,24 @@ export function ProductsShowcase() {
             <button
               key={category}
               type="button"
-              onClick={() => setActiveCategory(category)}
+              onClick={() => {
+                setManualCategory(category)
+
+                if (category !== 'todos') {
+                  const firstOfCategory = products.find((product) => product.category === category)
+
+                  if (firstOfCategory) {
+                    setManualProductId(firstOfCategory.id)
+                    const nextIndex = autoSequence.findIndex((item) => item.id === firstOfCategory.id)
+
+                    if (nextIndex >= 0) {
+                      setAutoIndex(nextIndex)
+                    }
+                  }
+                } else {
+                  setAutoIndex(0)
+                }
+              }}
               className={`focus-ring rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${
                 category === activeCategory
                   ? 'border-amber-300/45 bg-amber-400/12 text-amber-200'
@@ -199,6 +244,17 @@ export function ProductsShowcase() {
           ))}
         </div>
 
+        <div className="mt-4 flex flex-wrap items-center gap-3">
+          <span className="text-xs text-slate-300">Troca automatica de categoria e produto em destaque.</span>
+        </div>
+
+        <div className="mt-3 h-1.5 w-full rounded-full bg-white/10">
+          <div
+            className={`h-full rounded-full bg-amber-400 transition-all duration-700 ${shouldAutoMode ? 'product-spotlight' : ''}`}
+            style={{ width: `${((autoIndex + 1) / Math.max(autoSequence.length, 1)) * 100}%` }}
+          />
+        </div>
+
         <div className="mt-8 grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
           <div className="grid gap-5 sm:grid-cols-2">
             {filteredProducts.map((product) => (
@@ -206,7 +262,14 @@ export function ProductsShowcase() {
                 key={product.id}
                 product={product}
                 isActive={selectedProduct?.id === product.id}
-                onSelect={() => setActiveProductId(product.id)}
+                onSelect={() => {
+                  setManualProductId(product.id)
+                  const nextIndex = autoSequence.findIndex((item) => item.id === product.id)
+
+                  if (nextIndex >= 0) {
+                    setAutoIndex(nextIndex)
+                  }
+                }}
               />
             ))}
           </div>
@@ -251,7 +314,7 @@ export function ProductsShowcase() {
                   href="#contato"
                   className="focus-ring inline-flex w-full items-center justify-center rounded-xl bg-amber-500 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-amber-400"
                 >
-                  Solicitar proposta deste escopo
+                  Solicitar proposta desta solucao
                 </Link>
                 <Link
                   href={buildWhatsappLink(`Ola, gostaria de cotar o produto: ${selectedProduct.name}.`)}

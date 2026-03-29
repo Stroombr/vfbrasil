@@ -12,12 +12,12 @@ const faqItems: FaqItem[] = [
   {
     question: 'Voces atendem projetos em todo o Brasil?',
     answer:
-      'Sim. A VF Brasil atua nacionalmente com suporte tecnico remoto e presencial, de acordo com a criticidade e o escopo da operacao.',
+      'Sim. A VF Brasil atua nacionalmente com suporte tecnico remoto e presencial, de acordo com a criticidade da operacao.',
   },
   {
-    question: 'Como funciona a proposta tecnico-comercial?',
+    question: 'Como funciona a proposta tecnica?',
     answer:
-      'Iniciamos com triagem do contexto, definimos escopo preliminar e enviamos proposta com etapas, premissas e prazo de execucao.',
+      'Iniciamos com triagem do contexto e enviamos proposta com etapas, premissas e prazo de execucao.',
   },
   {
     question: 'A equipe apoia nacionalizacao de pecas importadas?',

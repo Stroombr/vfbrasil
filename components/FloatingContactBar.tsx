@@ -20,7 +20,7 @@ export function FloatingContactBar() {
           href={buildWhatsappLink(`Ola, gostaria de falar com a equipe da ${companyProfile.brandName}.`)}
           target="_blank"
           rel="noreferrer"
-          className="focus-ring inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-lg bg-emerald-500 px-3 py-2 text-sm font-semibold text-emerald-950"
+          className="focus-ring inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-lg bg-amber-500 px-3 py-2 text-sm font-semibold text-slate-950"
         >
           <MessageCircle className="h-4 w-4" />
           WhatsApp
