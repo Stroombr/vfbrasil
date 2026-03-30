@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowUpRight, Building2, Clock3, Factory, ShieldCheck, type LucideIcon } from 'lucide-react'
+import { ArrowUpRight, Clock3, Factory, ShieldCheck, type LucideIcon } from 'lucide-react'
 
 import { ClientList } from '@/components/Clients'
 import { FloatingContactBar } from '@/components/FloatingContactBar'
@@ -58,8 +58,9 @@ type UnitsCopy = {
   unitsTitle: string
   onsiteVisits: string
   viewRoute: string
-  mapTitle: string
 }
+
+const unitPhotos = ['/unidade-varzea-paulista.jpeg', '/teste.jpg'] as const
 
 function getTeamPeople(locale: Locale): TeamPerson[] {
   const byLocale: Record<Locale, TeamPerson[]> = {
@@ -155,35 +156,30 @@ function getUnitsCopy(locale: Locale): UnitsCopy {
       unitsTitle: 'Presenca em Sao Paulo',
       onsiteVisits: 'Atendimentos onsite',
       viewRoute: 'Ver rota',
-      mapTitle: 'Mapa de atuacao VF Brasil',
     },
     en: {
       unitsEyebrow: 'Sites',
       unitsTitle: 'Presence in Sao Paulo',
       onsiteVisits: 'On-site service',
       viewRoute: 'View route',
-      mapTitle: 'VF Brasil service map',
     },
     es: {
       unitsEyebrow: 'Unidades',
       unitsTitle: 'Presencia en Sao Paulo',
       onsiteVisits: 'Atenciones presenciales',
       viewRoute: 'Ver ruta',
-      mapTitle: 'Mapa de actuacion VF Brasil',
     },
     fr: {
       unitsEyebrow: 'Unites',
       unitsTitle: 'Presence a Sao Paulo',
       onsiteVisits: 'Interventions sur site',
       viewRoute: 'Voir itineraire',
-      mapTitle: 'Carte d intervention VF Brasil',
     },
     it: {
       unitsEyebrow: 'Unita',
       unitsTitle: 'Presenza a San Paolo',
       onsiteVisits: 'Interventi onsite',
       viewRoute: 'Vedi percorso',
-      mapTitle: 'Mappa di intervento VF Brasil',
     },
   }
 
@@ -356,6 +352,17 @@ export default async function Home() {
                 {copy.heroDescription}
               </p>
 
+              <div className="flex flex-wrap gap-2">
+                {copy.specialties.slice(0, 3).map((item) => (
+                  <span
+                    key={`hero-specialty-${item}`}
+                    className="rounded-full border border-white/20 bg-white/5 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-100"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Link
                   href="#contato"
@@ -373,9 +380,9 @@ export default async function Home() {
 
               <div className="grid gap-3 border-t border-white/15 pt-6 sm:grid-cols-2">
                 {keyNumbers.map((item) => (
-                  <article key={item.label} className="rounded-xl px-2 py-2">
+                  <article key={item.label} className="rounded-2xl border border-white/15 bg-white/5 px-4 py-4">
                     <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-300">{item.label}</p>
-                    <p className="mt-1 text-2xl font-semibold text-white">{item.value}</p>
+                    <p className="mt-2 text-2xl font-semibold text-white">{item.value}</p>
                   </article>
                 ))}
               </div>
@@ -392,7 +399,7 @@ export default async function Home() {
                 <p className="vf-copy max-w-2xl">{copy.companyOverview}</p>
               </div>
 
-              <div className="space-y-3">
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
                 {copy.specialties.map((item, index) => (
                   <Link
                     key={item}
@@ -400,7 +407,12 @@ export default async function Home() {
                     className="focus-ring group vf-panel-soft flex items-center justify-between gap-3 px-4 py-3 text-sm font-medium text-slate-200 transition-all duration-300 hover:-translate-y-0.5 hover:border-amber-300/35 hover:bg-white/10 active:scale-[0.995]"
                     aria-label={item}
                   >
-                    <span>{item}</span>
+                    <span className="inline-flex items-center gap-3">
+                      <span className="inline-flex h-6 w-6 items-center justify-center rounded-full border border-white/20 bg-white/5 text-[10px] font-semibold text-amber-300">
+                        {index + 1}
+                      </span>
+                      <span>{item}</span>
+                    </span>
                     <ArrowUpRight className="h-4 w-4 shrink-0 text-amber-300 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </Link>
                 ))}
@@ -416,9 +428,10 @@ export default async function Home() {
                 <Link
                   key={item.title}
                   href={differentiatorTargets[index] ?? '#contato'}
-                  className="focus-ring group surface-panel block rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-amber-300/40 hover:bg-white/10 active:scale-[0.99]"
+                  className="focus-ring group surface-panel relative block rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-amber-300/40 hover:bg-white/10 active:scale-[0.99]"
                   aria-label={item.title}
                 >
+                  <span className="absolute left-6 top-0 h-1.5 w-16 -translate-y-1/2 rounded-full bg-amber-500" />
                   <div className="flex items-start justify-between gap-3">
                     <span className="inline-flex rounded-lg border border-white/15 bg-white/10 p-2 text-amber-300 transition group-hover:border-amber-300/35 group-hover:bg-amber-400/10">
                       <item.icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
@@ -449,48 +462,59 @@ export default async function Home() {
 
         <SectionReveal delayMs={58}>
           <section id="unidades" className="vf-shell pb-20">
-            <div className="surface-panel rounded-3xl p-8 sm:p-10">
-              <div className="flex flex-wrap items-start justify-between gap-4">
-                <div>
-                  <p className="vf-eyebrow">{unitsCopy.unitsEyebrow}</p>
-                  <h2 className="vf-title sm:text-4xl">{unitsCopy.unitsTitle}</h2>
-                </div>
-                <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-slate-200">
-                  <Building2 className="h-4 w-4 text-amber-300" />
-                  {unitsCopy.onsiteVisits}
-                </span>
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <div className="vf-heading-left">
+                <p className="vf-eyebrow">{unitsCopy.unitsEyebrow}</p>
+                <h2 className="vf-title sm:text-4xl">{unitsCopy.unitsTitle}</h2>
               </div>
+              <span className="inline-flex items-center rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-slate-200">
+                {unitsCopy.onsiteVisits}
+              </span>
+            </div>
 
-              <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                {companyLocations.map((location) => (
-                  <article key={location.name} className="vf-panel-soft p-4">
-                    <h3 className="text-sm font-semibold text-white">{location.name}</h3>
-                    <p className="mt-2 text-sm leading-6 text-slate-300">
-                      {location.address}
-                      <br />
-                      {location.cityState} - CEP {location.zipCode}
-                    </p>
-                    <Link
-                      href={location.mapsUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="focus-ring mt-3 inline-flex text-xs font-semibold uppercase tracking-[0.14em] text-amber-300 transition hover:text-amber-200"
-                    >
-                      {unitsCopy.viewRoute}
-                    </Link>
+            <div className="mt-8 grid gap-6 lg:grid-cols-2">
+              {companyLocations.map((location, index) => {
+                const locationTag = location.name.split('-')[0]?.trim() || location.name
+
+                return (
+                  <article
+                    key={location.name}
+                    className="group overflow-hidden rounded-3xl border border-white/10 bg-[#080d15]/60 transition-all duration-300 hover:-translate-y-1 hover:border-amber-300/30"
+                  >
+                    <div className="relative h-56 overflow-hidden sm:h-64">
+                      <Image
+                        src={unitPhotos[index % unitPhotos.length]}
+                        alt={`${location.name} - ${location.cityState}`}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#060910] via-[#060910]/45 to-transparent" />
+                      <span className="absolute left-4 top-4 inline-flex rounded-full border border-white/20 bg-[#04070f]/75 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-amber-200">
+                        {locationTag}
+                      </span>
+                    </div>
+
+                    <div className="space-y-3 p-5 sm:p-6">
+                      <h3 className="text-lg font-semibold text-white">{location.name}</h3>
+                      <p className="text-sm leading-6 text-slate-300">
+                        {location.address}
+                        <br />
+                        {location.cityState} - CEP {location.zipCode}
+                      </p>
+                      <Link
+                        href={location.mapsUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="focus-ring inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-amber-300 transition hover:text-amber-200"
+                      >
+                        {unitsCopy.viewRoute}
+                        <ArrowUpRight className="h-3.5 w-3.5" />
+                      </Link>
+                    </div>
                   </article>
-                ))}
-              </div>
-
-              <div className="mt-6 overflow-hidden rounded-2xl border border-white/10">
-                <iframe
-                  src="https://www.google.com/maps/d/embed?mid=1xWXr5wQn_rYW2_he2zYLtlbnY1GFZiM&ehbc=2E312F&noprof=1"
-                  title={unitsCopy.mapTitle}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="h-[320px] w-full sm:h-[420px]"
-                />
-              </div>
+                )
+              })}
             </div>
           </section>
         </SectionReveal>
@@ -507,7 +531,8 @@ export default async function Home() {
 
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
                   {copy.differentiators.map((item) => (
-                    <article key={item.title} className="rounded-2xl border border-white/10 p-4">
+                    <article key={item.title} className="surface-panel relative rounded-2xl p-4">
+                      <span className="absolute left-4 top-0 h-1 w-12 -translate-y-1/2 rounded-full bg-amber-500" />
                       <span className="inline-flex rounded-lg border border-white/15 bg-white/10 p-2 text-amber-300">
                         <item.icon className="h-4 w-4" />
                       </span>

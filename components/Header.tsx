@@ -8,7 +8,6 @@ import { Menu, X } from 'lucide-react'
 import type { Locale } from '@/data/i18n'
 import { LanguageSwitcher } from './LanguageSwitcher'
 import { NavbarItemsLarge, NavbarItemsStandard } from './Navbar'
-import { ThemeToggle } from './ThemeToggle'
 import vfLogo from './../public/vflogo.png'
 
 type HeaderProps = {
@@ -127,7 +126,7 @@ export function Header({ locale = 'pt' }: HeaderProps) {
       } backdrop-blur-xl`}
     >
       <nav
-        className="vf-shell grid h-[74px] grid-cols-[minmax(0,1fr)_auto] items-center gap-3 lg:grid-cols-[auto_1fr_auto] lg:gap-4"
+        className="vf-shell grid h-[68px] grid-cols-[minmax(0,1fr)_auto] items-center gap-2 sm:h-[74px] sm:gap-3 lg:grid-cols-[auto_1fr_auto] lg:gap-4"
         aria-label="Global"
       >
         <Link
@@ -135,26 +134,26 @@ export function Header({ locale = 'pt' }: HeaderProps) {
           className="focus-ring relative z-20 flex min-w-0 items-center gap-2.5 sm:gap-3 lg:z-30"
           onClick={() => setMobileMenuOpen(false)}
         >
-          <span className="flex flex-col gap-1">
+          <span className="flex items-center gap-1 sm:flex-col sm:gap-1">
             <Image
               src="/brazil-flag.svg"
               alt={copy[locale].brazilFlag}
               width={28}
               height={18}
-              className="h-4 w-auto rounded-sm border border-white/20 object-cover"
+              className="h-3.5 w-auto rounded-sm border border-white/20 object-cover sm:h-4"
             />
             <Image
               src="/italy-flag.svg"
               alt={copy[locale].italyFlag}
               width={28}
               height={18}
-              className="h-4 w-auto rounded-sm border border-white/20 object-cover"
+              className="h-3.5 w-auto rounded-sm border border-white/20 object-cover sm:h-4"
             />
           </span>
           <Image
             src={vfLogo}
             alt="Logo da VF Brasil"
-            className="h-10 w-auto max-w-[144px] object-contain sm:h-13 sm:max-w-[180px] lg:max-w-none"
+            className="h-9 w-auto max-w-[132px] object-contain sm:h-13 sm:max-w-[180px] lg:max-w-none"
             priority
           />
         </Link>
@@ -164,16 +163,13 @@ export function Header({ locale = 'pt' }: HeaderProps) {
         </div>
 
         <div className="ml-auto hidden items-center gap-3 lg:flex">
-          <ThemeToggle locale={locale} />
           <LanguageSwitcher locale={locale} label={copy[locale].language} />
         </div>
 
-        <div className="relative z-50 ml-auto flex items-center gap-2 lg:hidden">
-          <ThemeToggle locale={locale} className="min-h-10 px-2.5" />
-          <LanguageSwitcher locale={locale} label={copy[locale].language} className="relative z-50" />
+        <div className="relative z-50 ml-auto flex items-center gap-1.5 lg:hidden">
           <button
             type="button"
-            className="focus-ring relative z-50 inline-flex min-h-10 min-w-10 items-center justify-center rounded-lg p-2 text-white touch-manipulation transition hover:text-amber-300"
+            className="focus-ring relative z-50 inline-flex min-h-10 min-w-10 items-center justify-center rounded-lg border border-white/20 bg-white/5 p-2 text-slate-100 touch-manipulation transition hover:bg-white/10 hover:text-amber-300"
             onClick={() => setMobileMenuOpen((prev) => !prev)}
             aria-expanded={mobileMenuOpen}
             aria-label={mobileMenuOpen ? copy[locale].closeMenu : copy[locale].openMenu}
@@ -187,6 +183,9 @@ export function Header({ locale = 'pt' }: HeaderProps) {
       {mobileMenuOpen && (
         <div id="mobile-navigation" className="relative z-40 border-t border-white/10 bg-[#06090f]/96 lg:hidden">
           <div className="vf-shell pb-5 pt-4">
+            <div className="mb-4 flex items-center justify-end">
+              <LanguageSwitcher locale={locale} label={copy[locale].language} className="relative z-50" />
+            </div>
             <NavbarItemsStandard locale={locale} onNavigate={() => setMobileMenuOpen(false)} />
           </div>
         </div>

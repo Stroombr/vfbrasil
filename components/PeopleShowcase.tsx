@@ -189,7 +189,7 @@ export function PeopleShowcase({ id, locale, people }: PeopleShowcaseProps) {
 
   return (
     <section id={id} className="vf-shell pb-12">
-      <div className="surface-panel rounded-3xl p-6 sm:p-8">
+      <div className="rounded-3xl p-6 sm:p-8">
         <div className="vf-heading-center">
           <p className="vf-eyebrow">{copy[locale].eyebrow}</p>
           <h2 className="vf-title sm:text-4xl">{copy[locale].title}</h2>

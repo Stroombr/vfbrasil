@@ -10,19 +10,11 @@ import { getRequestLocale } from '@/data/i18n.server'
 const themeBootstrapScript = `
 (() => {
   try {
-    const storageKey = 'vf-theme'
-    const stored = window.localStorage.getItem(storageKey)
-    const theme =
-      stored === 'light' || stored === 'dark'
-        ? stored
-        : window.matchMedia('(prefers-color-scheme: light)').matches
-          ? 'light'
-          : 'dark'
-
     const root = document.documentElement
-    root.setAttribute('data-theme', theme)
-    root.classList.remove('theme-light', 'theme-dark')
-    root.classList.add(theme === 'light' ? 'theme-light' : 'theme-dark')
+    root.setAttribute('data-theme', 'dark')
+    root.classList.remove('theme-light')
+    root.classList.add('theme-dark')
+    window.localStorage.setItem('vf-theme', 'dark')
   } catch (_error) {
     // keep default server theme
   }

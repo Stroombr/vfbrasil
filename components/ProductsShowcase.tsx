@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useMemo, useState } from 'react'
-import { ArrowRight, ChevronRight, Factory, MessageCircleMore, PackageCheck, Settings2, Wrench, X } from 'lucide-react'
+import { ArrowRight, MessageCircleMore, X } from 'lucide-react'
 
 import { interpolate, type Locale } from '@/data/i18n'
 import { buildWhatsappLink } from '@/data/company'
@@ -46,13 +46,6 @@ type Copy = {
   whatsappTemplate: string
 }
 
-const categoryIcons: Record<Exclude<ProductCategory, 'todos'>, typeof Factory> = {
-  maquinas: Factory,
-  pecas: PackageCheck,
-  dispositivos: Wrench,
-  engenharia: Settings2,
-}
-
 const products: Product[] = [
   {
     id: 'laminador',
@@ -93,8 +86,8 @@ const products: Product[] = [
     specs: ['Materiais conforme exigencia de carga', 'Rastreabilidade de lote', 'Inspecao final com relatorio'],
     applications: ['Manutencao preventiva', 'Reducao de parada por falta de reposicao'],
     images: [
-      { src: '/teste.jpg', position: 'center 60%' },
-      { src: '/home-bg.jpg', position: 'center 52%' },
+      { src: '/produto-roletes.jpg', position: 'center 50%' },
+      { src: '/produto-discos-estoque.jpg', position: 'center 50%' },
       { src: '/teste.jpg', position: 'center 82%' },
       { src: '/home-bg.jpg', position: 'center 20%' },
     ],
@@ -148,11 +141,11 @@ const products: Product[] = [
 
 const copyByLocale: Record<Locale, Copy> = {
   pt: {
-    eyebrow: 'Produtos e solucoes',
-    title: 'Portfolio VF Brasil',
-    description: 'Agora com galeria de fotos e drawer lateral com informacoes completas por produto.',
-    catalogLabel: 'Catalogo',
-    catalogHint: 'Clique em um item para trocar o destaque. Clique na foto para abrir o drawer.',
+    eyebrow: 'Solucoes industriais',
+    title: 'Nossas Solucoes Industriais',
+    description: 'Selecione um card para visualizar detalhes tecnicos, aplicacoes e galeria completa de cada produto.',
+    catalogLabel: 'Linha de solucoes',
+    catalogHint: 'Clique em um card para abrir os detalhes no drawer.',
     detailsLabel: 'Detalhes da solucao',
     leadTime: 'Prazo',
     specs: 'Especificacoes',
@@ -171,7 +164,7 @@ const copyByLocale: Record<Locale, Copy> = {
     title: 'VF Brasil portfolio',
     description: 'Now with photo gallery and a side drawer with complete product details.',
     catalogLabel: 'Catalog',
-    catalogHint: 'Click an item to highlight it. Click the image to open the drawer.',
+    catalogHint: 'Click an item to open details in the drawer.',
     detailsLabel: 'Solution details',
     leadTime: 'Lead time',
     specs: 'Specifications',
@@ -190,7 +183,7 @@ const copyByLocale: Record<Locale, Copy> = {
     title: 'Portafolio VF Brasil',
     description: 'Ahora con galeria de fotos y drawer lateral con informacion completa por producto.',
     catalogLabel: 'Catalogo',
-    catalogHint: 'Haga clic en un item para destacarlo. Haga clic en la imagen para abrir el drawer.',
+    catalogHint: 'Haga clic en un item para abrir los detalles en el drawer.',
     detailsLabel: 'Detalles de la solucion',
     leadTime: 'Plazo',
     specs: 'Especificaciones',
@@ -209,7 +202,7 @@ const copyByLocale: Record<Locale, Copy> = {
     title: 'Portefeuille VF Brasil',
     description: 'Desormais avec galerie photo et drawer lateral avec details complets par produit.',
     catalogLabel: 'Catalogue',
-    catalogHint: 'Cliquez sur un element pour le mettre en avant. Cliquez sur l image pour ouvrir le drawer.',
+    catalogHint: 'Cliquez sur un element pour ouvrir les details dans le drawer.',
     detailsLabel: 'Details de la solution',
     leadTime: 'Delai',
     specs: 'Specifications',
@@ -228,7 +221,7 @@ const copyByLocale: Record<Locale, Copy> = {
     title: 'Portafoglio VF Brasil',
     description: 'Ora con galleria foto e drawer laterale con dettagli completi per prodotto.',
     catalogLabel: 'Catalogo',
-    catalogHint: 'Clicca un elemento per evidenziarlo. Clicca l immagine per aprire il drawer.',
+    catalogHint: 'Clicca un elemento per aprire i dettagli nel drawer.',
     detailsLabel: 'Dettagli della soluzione',
     leadTime: 'Tempi',
     specs: 'Specifiche',
@@ -267,27 +260,37 @@ function ProductCard({
     <button
       type="button"
       onClick={onClick}
-      className={`focus-ring group relative flex w-full items-center gap-3 overflow-hidden rounded-2xl border p-3.5 text-left transition ${
+      className={`focus-ring group relative flex h-full w-full flex-col overflow-visible rounded-2xl border text-left transition ${
         selected
-          ? 'border-amber-300/45 bg-amber-400/10 shadow-[0_14px_30px_rgba(0,0,0,0.26)]'
-          : 'border-white/15 bg-white/5 hover:border-amber-300/35 hover:bg-white/10'
+          ? 'border-amber-300/45 bg-white/[0.03] shadow-[0_14px_30px_rgba(0,0,0,0.26)]'
+          : 'border-white/15 bg-white/5 hover:-translate-y-0.5 hover:border-amber-300/35 hover:bg-white/10'
       }`}
       aria-label={`${copy.viewDetails} ${product.name}`}
     >
-      <div className="relative h-16 w-20 shrink-0 overflow-hidden rounded-lg border border-white/10 bg-white/5 sm:h-20 sm:w-24">
+      <div className="relative h-44 w-full overflow-hidden rounded-t-2xl border-b border-white/10 bg-white/5 sm:h-48">
         <Image
           src={image.src}
           alt={`Foto de ${product.name}`}
           fill
-          className="object-cover transition duration-300 group-hover:scale-105"
+          className="object-cover transition duration-500 group-hover:scale-105"
           style={{ objectPosition: image.position }}
         />
+        <div className="media-dim-overlay absolute inset-0 opacity-55" />
       </div>
 
-      <div className="min-w-0 flex-1">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-amber-300">{categoryLabel}</p>
-        <p className="mt-1 text-sm font-semibold text-white sm:text-base">{product.name}</p>
-        <p className="mt-1 text-xs leading-5 text-slate-300">{product.summary}</p>
+      <div className="relative -mt-7 mx-4 mb-4 flex w-[calc(100%-2rem)] flex-1 flex-col rounded-xl border border-white/20 bg-[#f7f8fa] px-4 pb-4 pt-5 shadow-[0_16px_26px_rgba(0,0,0,0.28)] min-h-[186px]">
+        <span className="absolute left-4 top-0 h-1.5 w-24 -translate-y-1/2 rounded-full bg-amber-500" />
+        <div className="flex flex-wrap items-center justify-between gap-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-500">
+          <span>{categoryLabel}</span>
+          <span>{copy.leadTime}: {product.leadTime}</span>
+        </div>
+
+        <p className="mt-2 text-lg font-semibold text-slate-900">{product.name}</p>
+        <p className="mt-2 text-sm leading-6 text-slate-700">{product.summary}</p>
+        <span className="mt-auto inline-flex items-center gap-2 pt-4 text-xs font-semibold uppercase tracking-[0.14em] text-amber-700">
+          {copy.openDrawer}
+          <ArrowRight className="h-3.5 w-3.5" />
+        </span>
       </div>
     </button>
   )
@@ -308,7 +311,6 @@ export function ProductsShowcase({ locale = 'pt' }: ProductsShowcaseProps) {
 
   const [activeCategory, setActiveCategory] = useState<ProductCategory>('todos')
   const [selectedProductId, setSelectedProductId] = useState(products[0]?.id ?? '')
-  const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(0)
 
   const [drawerProductId, setDrawerProductId] = useState<string | null>(null)
   const [drawerPhotoIndex, setDrawerPhotoIndex] = useState(0)
@@ -346,9 +348,6 @@ export function ProductsShowcase({ locale = 'pt' }: ProductsShowcaseProps) {
     return null
   }
 
-  const selectedImage = selectedProduct.images[selectedPhotoIndex] ?? selectedProduct.images[0]
-  const SelectedIcon = categoryIcons[selectedProduct.category]
-
   const openDrawer = (product: Product, photoIndex = 0) => {
     setDrawerProductId(product.id)
     setDrawerPhotoIndex(photoIndex)
@@ -362,152 +361,57 @@ export function ProductsShowcase({ locale = 'pt' }: ProductsShowcaseProps) {
         <p className="vf-copy mx-auto max-w-3xl">{copy.description}</p>
       </div>
 
-      <div className="mt-8 flex flex-wrap items-center gap-2">
-        {(Object.keys(categoryLabels) as ProductCategory[]).map((category) => (
-          <button
-            key={category}
-            type="button"
-            onClick={() => {
-              setActiveCategory(category)
-              const nextProducts = category === 'todos' ? products : products.filter((item) => item.category === category)
-              setSelectedProductId(nextProducts[0]?.id ?? '')
-              setSelectedPhotoIndex(0)
-            }}
-            className={`focus-ring inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${
-              category === activeCategory
-                ? 'border-amber-300/45 bg-amber-400/12 text-amber-200'
-                : 'border-white/20 bg-white/5 text-slate-200 hover:bg-white/10'
-            }`}
-            aria-pressed={category === activeCategory}
-          >
-            <span>{categoryLabels[category]}</span>
-          </button>
-        ))}
+      <div className="mt-8 overflow-x-auto pb-1 scrollbar-hide">
+        <div className="inline-flex min-w-full gap-2 sm:gap-3">
+          {(Object.keys(categoryLabels) as ProductCategory[]).map((category) => {
+            const isActive = category === activeCategory
+
+            return (
+              <button
+                key={category}
+                type="button"
+                onClick={() => {
+                  setActiveCategory(category)
+                  const nextProducts = category === 'todos' ? products : products.filter((item) => item.category === category)
+                  setSelectedProductId(nextProducts[0]?.id ?? '')
+                }}
+                className={`focus-ring relative min-w-[118px] whitespace-nowrap rounded-lg border px-4 pb-2.5 pt-3 text-[11px] font-semibold uppercase tracking-[0.12em] transition ${
+                  isActive
+                    ? 'border-amber-300/50 bg-[#f7f8fa] text-slate-900 shadow-[0_10px_20px_rgba(0,0,0,0.22)]'
+                    : 'border-white/20 bg-white/5 text-slate-200 hover:border-amber-300/30 hover:bg-white/10'
+                }`}
+                aria-pressed={isActive}
+              >
+                {isActive ? <span className="absolute left-4 top-0 h-1 w-14 -translate-y-1/2 rounded-full bg-amber-500" /> : null}
+                <span>{categoryLabels[category]}</span>
+              </button>
+            )
+          })}
+        </div>
       </div>
 
-      <div className="mt-8 grid gap-6 xl:grid-cols-[1.02fr_1.18fr]">
-        <aside className="surface-panel rounded-2xl p-4 sm:p-5">
+      <div className="mt-8">
+        <div className="flex flex-wrap items-start justify-between gap-3">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-300">{copy.catalogLabel}</p>
-          <p className="mt-2 text-xs leading-5 text-slate-300">{copy.catalogHint}</p>
+          <p className="text-xs leading-5 text-slate-300">{copy.catalogHint}</p>
+        </div>
 
-          <div className="mt-4 space-y-3">
-            {filteredProducts.map((product) => (
+        <div className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {filteredProducts.map((product) => (
+            <div key={product.id}>
               <ProductCard
-                key={product.id}
                 product={product}
                 selected={selectedProduct.id === product.id}
                 categoryLabel={categoryLabels[product.category]}
                 copy={copy}
                 onClick={() => {
                   setSelectedProductId(product.id)
-                  setSelectedPhotoIndex(0)
+                  openDrawer(product)
                 }}
               />
-            ))}
-          </div>
-        </aside>
-
-        <article className="surface-panel rounded-2xl p-4 sm:p-6 xl:sticky xl:top-28 xl:h-fit">
-          <button
-            type="button"
-            onClick={() => openDrawer(selectedProduct, selectedPhotoIndex)}
-            className="focus-ring relative block h-56 w-full overflow-hidden rounded-xl text-left sm:h-72"
-            aria-label={`${copy.openDrawer}: ${selectedProduct.name}`}
-          >
-            <Image
-              src={selectedImage.src}
-              alt={`Foto de ${selectedProduct.name}`}
-              fill
-              className="object-cover"
-              style={{ objectPosition: selectedImage.position }}
-            />
-            <div className="media-dim-overlay absolute inset-0" />
-
-            <div className="absolute bottom-3 left-3 right-3 flex flex-wrap items-center justify-between gap-2">
-              <span className="media-label-badge inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.13em]">
-                <SelectedIcon className="h-3.5 w-3.5 text-amber-300" />
-                {categoryLabels[selectedProduct.category]}
-              </span>
-              <span className="rounded-full border border-white/20 bg-[#04070f]/75 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.13em] text-slate-100">
-                {copy.leadTime}: {selectedProduct.leadTime}
-              </span>
             </div>
-          </button>
-
-          <div className="mt-3 grid grid-cols-4 gap-2 sm:grid-cols-5">
-            {selectedProduct.images.map((image, index) => (
-              <button
-                key={`${selectedProduct.id}-${index}`}
-                type="button"
-                onClick={() => setSelectedPhotoIndex(index)}
-                className={`focus-ring relative h-14 overflow-hidden rounded-lg border transition sm:h-16 ${
-                  index === selectedPhotoIndex ? 'border-amber-300/45 ring-1 ring-amber-300/40' : 'border-white/20 hover:border-amber-300/35'
-                }`}
-                aria-label={`${copy.gallery} ${index + 1}`}
-              >
-                <Image src={image.src} alt={`${selectedProduct.name} ${index + 1}`} fill className="object-cover" style={{ objectPosition: image.position }} />
-              </button>
-            ))}
-          </div>
-
-          <div className="mt-5">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-300">{copy.detailsLabel}</p>
-            <h3 className="mt-2 text-2xl font-semibold text-white">{selectedProduct.name}</h3>
-            <p className="mt-3 text-sm leading-7 text-slate-300">{selectedProduct.summary}</p>
-          </div>
-
-          <div className="mt-5 grid gap-4 sm:grid-cols-2">
-            <div className="rounded-xl border border-white/10 bg-white/5 p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-300">{copy.specs}</p>
-              <ul className="mt-3 space-y-2 text-sm text-slate-200">
-                {selectedProduct.specs.map((spec) => (
-                  <li key={spec} className="flex items-start gap-2">
-                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-amber-300" />
-                    <span>{spec}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="rounded-xl border border-white/10 bg-white/5 p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-300">{copy.applications}</p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {selectedProduct.applications.map((item) => (
-                  <span key={item} className="inline-flex rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-semibold text-slate-200">
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-6 grid gap-3 sm:grid-cols-3">
-            <Link
-              href="#contato"
-              className="focus-ring inline-flex w-full items-center justify-center gap-2 rounded-xl border border-amber-300/40 bg-amber-400/10 px-4 py-2.5 text-sm font-semibold text-amber-200 transition hover:border-amber-300/45 hover:bg-amber-400/12"
-            >
-              {copy.quote}
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link
-              href={buildWhatsappLink(interpolate(copy.whatsappTemplate, { product: selectedProduct.name }))}
-              target="_blank"
-              rel="noreferrer"
-              className="focus-ring inline-flex w-full items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10"
-            >
-              <MessageCircleMore className="h-4 w-4 text-amber-300" />
-              {copy.whatsapp}
-            </Link>
-            <button
-              type="button"
-              onClick={() => openDrawer(selectedProduct, selectedPhotoIndex)}
-              className="focus-ring inline-flex w-full items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-4 py-2.5 text-sm font-semibold text-slate-100 transition hover:bg-white/10"
-            >
-              {copy.openDrawer}
-              <ChevronRight className="h-4 w-4 text-amber-300" />
-            </button>
-          </div>
-        </article>
+          ))}
+        </div>
       </div>
 
       {drawerProduct ? (

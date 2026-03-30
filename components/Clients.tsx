@@ -1,5 +1,6 @@
 ﻿"use client"
 
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import type { Locale } from '@/data/i18n'
 
@@ -8,7 +9,7 @@ import sinobrasLogo from '../public/sinobras.png'
 import votorantimLogo from '../public/votorantim-metais.png'
 import acerosLogo from '../public/aceros.png'
 import ironbergLogo from '../public/ironberg.png'
-import gavioesLogo from '../public/gaviões.png'
+import gavioesLogo from '../public/gavioes.png'
 import petrobrasLogo from '../public/br-petrobras.png'
 
 const clients = [
@@ -18,14 +19,67 @@ const clients = [
   { src: sinobrasLogo, alt: 'Logo Sinobras', imageClassName: 'h-auto max-h-22 sm:max-h-30', relevance: 85 },
   { src: acerosLogo, alt: 'Logo Aceros', imageClassName: 'h-auto max-h-22 sm:max-h-30', relevance: 80 },
   { src: ironbergLogo, alt: 'Logo Ironberg', imageClassName: 'h-auto max-h-22 sm:max-h-30', relevance: 75 },
-  { src: gavioesLogo, alt: 'Logo Gaviões', imageClassName: 'h-auto max-h-22 sm:max-h-30', relevance: 70 },
+  { src: gavioesLogo, alt: 'Logo Gavioes', imageClassName: 'h-auto max-h-22 sm:max-h-30', relevance: 70 },
 ].sort((left, right) => right.relevance - left.relevance)
+const MOBILE_VISIBLE_COUNT = 3
 
 type ClientListProps = {
   locale?: Locale
 }
 
 export function ClientList({ locale = 'pt' }: ClientListProps) {
+  const mobilePageCount = Math.max(1, Math.ceil(clients.length / MOBILE_VISIBLE_COUNT))
+  const [mobilePage, setMobilePage] = useState(0)
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || mobilePageCount <= 1) {
+      return
+    }
+
+    const mobileQuery = window.matchMedia('(max-width: 639px)')
+    const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    let interval: number | null = null
+
+    const stopRotation = () => {
+      if (interval === null) {
+        return
+      }
+
+      window.clearInterval(interval)
+      interval = null
+    }
+
+    const startRotation = () => {
+      if (!mobileQuery.matches || reducedMotionQuery.matches) {
+        return
+      }
+
+      interval = window.setInterval(() => {
+        setMobilePage((prev) => (prev + 1) % mobilePageCount)
+      }, 3500)
+    }
+
+    const syncRotation = () => {
+      stopRotation()
+      startRotation()
+    }
+
+    syncRotation()
+    mobileQuery.addEventListener('change', syncRotation)
+    reducedMotionQuery.addEventListener('change', syncRotation)
+
+    return () => {
+      stopRotation()
+      mobileQuery.removeEventListener('change', syncRotation)
+      reducedMotionQuery.removeEventListener('change', syncRotation)
+    }
+  }, [mobilePageCount])
+
+  const visibleMobileClients = Array.from({ length: MOBILE_VISIBLE_COUNT }, (_, offset) => {
+    const index = (mobilePage * MOBILE_VISIBLE_COUNT + offset) % clients.length
+    return clients[index]
+  })
+
   const copy: Record<
     Locale,
     {
@@ -35,9 +89,9 @@ export function ClientList({ locale = 'pt' }: ClientListProps) {
     }
   > = {
     pt: {
-      eyebrow: 'Prova de confiança',
-      title: 'Empresas líderes já operam com suporte técnico da VF Brasil',
-      description: 'Relação de longo prazo com foco em disponibilidade, qualidade e prazo.',
+      eyebrow: 'Prova de confianca',
+      title: 'Empresas lideres ja operam com suporte tecnico da VF Brasil',
+      description: 'Relacao de longo prazo com foco em disponibilidade, qualidade e prazo.',
     },
     en: {
       eyebrow: 'Proof of trust',
@@ -69,7 +123,33 @@ export function ClientList({ locale = 'pt' }: ClientListProps) {
         <p className="vf-copy">{copy[locale].description}</p>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7">
+      <div className="sm:hidden">
+        <div className="grid grid-cols-3 gap-3">
+          {visibleMobileClients.map((client, index) => (
+            <article
+              key={`mobile-client-${client.alt}-${index}`}
+              className="surface-panel flex min-h-[120px] items-center justify-center rounded-xl px-2 py-4"
+            >
+              <Image
+                src={client.src}
+                alt={client.alt}
+                className={`${client.imageClassName} w-auto object-contain`}
+              />
+            </article>
+          ))}
+        </div>
+
+        <div className="mt-3 flex items-center justify-center gap-2" aria-hidden="true">
+          {Array.from({ length: mobilePageCount }, (_, index) => (
+            <span
+              key={`mobile-indicator-${index}`}
+              className={`h-2 rounded-full transition-all ${index === mobilePage ? 'w-6 bg-amber-300' : 'w-2 bg-white/25'}`}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="hidden gap-4 sm:grid sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7">
         {clients.map((client) => (
           <article
             key={client.alt}
