@@ -3,9 +3,9 @@ import Link from 'next/link'
 import { companyProfile } from '@/data/company'
 
 const deliveryCommitments = [
-  'Diagnostico inicial com prioridade por impacto operacional',
-  'Cronograma com marcos de entrega visiveis',
-  'Suporte tecnico na implantacao e estabilizacao',
+  'Diagnóstico inicial com prioridade por impacto operacional',
+  'Cronograma com marcos de entrega visíveis',
+  'Suporte técnico na implantação e estabilização',
 ]
 
 export function CompanyOverview() {
@@ -15,7 +15,7 @@ export function CompanyOverview() {
         <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
           <div className="space-y-5">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-300">Sobre a VF Brasil</p>
-            <h2 className="text-2xl font-semibold text-white sm:text-4xl">Estrutura tecnica para entrega previsivel</h2>
+            <h2 className="text-2xl font-semibold text-white sm:text-4xl">Estrutura técnica para entrega previsível</h2>
             <p className="text-sm leading-7 text-slate-300 sm:text-base">{companyProfile.overview}</p>
 
             <div className="flex flex-wrap gap-2 pt-1">
@@ -42,7 +42,7 @@ export function CompanyOverview() {
             <h3 className="text-lg font-semibold text-white">Resumo objetivo</h3>
             <dl className="space-y-3 text-sm">
               <div className="flex items-start justify-between gap-3">
-                <dt className="text-slate-400">Industria</dt>
+                <dt className="text-slate-400">Indústria</dt>
                 <dd className="text-right text-slate-100">{companyProfile.industry}</dd>
               </div>
               <div className="flex items-start justify-between gap-3">
@@ -50,7 +50,7 @@ export function CompanyOverview() {
                 <dd className="text-right text-slate-100">{companyProfile.companySize}</dd>
               </div>
               <div className="flex items-start justify-between gap-3">
-                <dt className="text-slate-400">Fundacao</dt>
+                <dt className="text-slate-400">Fundação</dt>
                 <dd className="text-right text-slate-100">{companyProfile.foundedYear}</dd>
               </div>
               <div className="flex items-start justify-between gap-3">
@@ -85,5 +85,6 @@ export function CompanyOverview() {
     </section>
   )
 }
+
 
 

@@ -10,34 +10,34 @@ type FaqItem = {
 
 const faqItems: FaqItem[] = [
   {
-    question: 'Voces atendem projetos em todo o Brasil?',
+    question: 'Vocês atendem projetos em todo o Brasil?',
     answer:
-      'Sim. A VF Brasil atua nacionalmente com suporte tecnico remoto e presencial, de acordo com a criticidade da operacao.',
+      'Sim. A VF Brasil atua nacionalmente com suporte técnico remoto e presencial, de acordo com a criticidade da operação.',
   },
   {
-    question: 'Como funciona a proposta tecnica?',
+    question: 'Como funciona a proposta técnica?',
     answer:
-      'Iniciamos com triagem do contexto e enviamos proposta com etapas, premissas e prazo de execucao.',
+      'Iniciamos com triagem do contexto e enviamos proposta com etapas, premissas e prazo de execução.',
   },
   {
-    question: 'A equipe apoia nacionalizacao de pecas importadas?',
+    question: 'A equipe apoia nacionalização de peças importadas?',
     answer:
-      'Sim. Fazemos estudo tecnico, engenharia reversa quando necessario e validacao de desempenho para manter confiabilidade operacional.',
+      'Sim. Fazemos estudo técnico, engenharia reversa quando necessário e validação de desempenho para manter confiabilidade operacional.',
   },
   {
     question: 'Quanto tempo leva para iniciar um atendimento?',
     answer:
-      'A triagem inicial normalmente acontece no mesmo dia util. O prazo de mobilizacao depende do tipo de servico e da localizacao da planta.',
+      'A triagem inicial normalmente acontece no mesmo dia útil. O prazo de mobilização depende do tipo de serviço e da localização da planta.',
   },
   {
-    question: 'A VF Brasil executa manutencao preventiva e corretiva?',
+    question: 'A VF Brasil executa manutenção preventiva e corretiva?',
     answer:
-      'Executamos ambos os modelos, com planejamento orientado por risco e foco em disponibilidade, seguranca e produtividade da linha.',
+      'Executamos ambos os modelos, com planejamento orientado por risco e foco em disponibilidade, segurança e produtividade da linha.',
   },
   {
-    question: 'Existe suporte apos entrega e implantacao?',
+    question: 'Existe suporte após entrega e implantação?',
     answer:
-      'Sim. Mantemos acompanhamento tecnico para estabilizacao operacional, ajustes e orientacao de melhoria continua.',
+      'Sim. Mantemos acompanhamento técnico para estabilização operacional, ajustes e orientação de melhoria contínua.',
   },
 ]
 
@@ -63,7 +63,7 @@ export function FaqAccordion() {
       <div className="surface-panel rounded-3xl p-8 sm:p-10">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-300">Perguntas frequentes</p>
-          <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">Respostas objetivas para apoiar sua contratacao</h2>
+          <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">Respostas objetivas para apoiar sua contratação</h2>
         </div>
 
         <div className="mx-auto mt-6 max-w-2xl">
@@ -123,5 +123,6 @@ export function FaqAccordion() {
     </section>
   )
 }
+
 
 

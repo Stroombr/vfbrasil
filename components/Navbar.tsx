@@ -3,26 +3,29 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useMemo, useState } from 'react'
+import type { Locale } from '@/data/i18n'
 
 type NavbarItemsStandardProps = {
+  locale: Locale
   onNavigate?: () => void
 }
 
 type NavItem = {
-  name: string
+  key: 'home' | 'company' | 'team' | 'products' | 'units' | 'contact'
   url: string
   sectionId?: string
 }
 
 const navbarItems: NavItem[] = [
-  { name: 'Home', url: '/' },
-  { name: 'Sobre', url: '/sobre' },
-  { name: 'Empresa', url: '/#overview', sectionId: 'overview' },
-  { name: 'Produtos', url: '/#produtos', sectionId: 'produtos' },
-  { name: 'Contato', url: '/#contato', sectionId: 'contato' },
+  { key: 'home', url: '/' },
+  { key: 'company', url: '/#overview', sectionId: 'overview' },
+  { key: 'team', url: '/#time', sectionId: 'time' },
+  { key: 'products', url: '/#produtos', sectionId: 'produtos' },
+  { key: 'units', url: '/#unidades', sectionId: 'unidades' },
+  { key: 'contact', url: '/#contato', sectionId: 'contato' },
 ]
 
-const trackableSections = ['overview', 'produtos', 'contato'] as const
+const trackableSections = ['overview', 'time', 'produtos', 'unidades', 'contato'] as const
 
 function getActiveSectionFromScroll() {
   if (typeof window === 'undefined') {
@@ -113,7 +116,54 @@ function useNavItems() {
   )
 }
 
-export function NavbarItemsLarge() {
+function getNavLabel(locale: Locale, key: NavItem['key']) {
+  const labels: Record<Locale, Record<NavItem['key'], string>> = {
+    pt: {
+      home: 'Inicio',
+      company: 'Empresa',
+      team: 'Time',
+      products: 'Produtos',
+      units: 'Unidades',
+      contact: 'Contato',
+    },
+    en: {
+      home: 'Home',
+      company: 'Company',
+      team: 'Team',
+      products: 'Products',
+      units: 'Sites',
+      contact: 'Contact',
+    },
+    es: {
+      home: 'Inicio',
+      company: 'Empresa',
+      team: 'Equipo',
+      products: 'Productos',
+      units: 'Unidades',
+      contact: 'Contacto',
+    },
+    fr: {
+      home: 'Accueil',
+      company: 'Entreprise',
+      team: 'Equipe',
+      products: 'Produits',
+      units: 'Unites',
+      contact: 'Contact',
+    },
+    it: {
+      home: 'Inizio',
+      company: 'Azienda',
+      team: 'Team',
+      products: 'Prodotti',
+      units: 'Unita',
+      contact: 'Contatto',
+    },
+  }
+
+  return labels[locale][key]
+}
+
+export function NavbarItemsLarge({ locale }: { locale: Locale }) {
   const items = useNavItems()
 
   return (
@@ -127,7 +177,7 @@ export function NavbarItemsLarge() {
               item.isActive ? 'text-amber-300' : 'text-slate-100 hover:text-amber-300'
             }`}
           >
-            {item.name}
+            {getNavLabel(locale, item.key)}
             <span
               className={`absolute -bottom-1 left-0 h-[2px] bg-amber-300 transition-all ${
                 item.isActive ? 'w-full' : 'w-0'
@@ -140,7 +190,7 @@ export function NavbarItemsLarge() {
   )
 }
 
-export function NavbarItemsStandard({ onNavigate }: NavbarItemsStandardProps) {
+export function NavbarItemsStandard({ locale, onNavigate }: NavbarItemsStandardProps) {
   const items = useNavItems()
 
   return (
@@ -149,18 +199,24 @@ export function NavbarItemsStandard({ onNavigate }: NavbarItemsStandardProps) {
         <li key={item.url}>
           <Link
             href={item.url}
-            onClick={onNavigate}
+            onClick={(event) => {
+              if (item.key === 'home' && typeof window !== 'undefined' && window.location.pathname === '/') {
+                event.preventDefault()
+                window.history.replaceState(null, '', '/')
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+              }
+
+              onNavigate?.()
+            }}
             aria-current={item.isActive ? 'page' : undefined}
             className={`focus-ring block rounded-lg px-3 py-2 text-base font-semibold transition ${
               item.isActive ? 'bg-white/15 text-amber-300' : 'text-slate-100 hover:bg-white/10 hover:text-amber-300'
             }`}
           >
-            {item.name}
+            {getNavLabel(locale, item.key)}
           </Link>
         </li>
       ))}
     </ul>
   )
 }
-
-

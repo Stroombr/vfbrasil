@@ -2,12 +2,14 @@
 
 import { Moon, Sun } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
+import type { Locale } from '@/data/i18n'
 
 type Theme = 'dark' | 'light'
 
 type ThemeToggleProps = {
   className?: string
   showLabel?: boolean
+  locale?: Locale
 }
 
 const STORAGE_KEY = 'vf-theme'
@@ -48,8 +50,47 @@ function applyTheme(theme: Theme) {
   window.dispatchEvent(new CustomEvent(EVENT_NAME, { detail: theme }))
 }
 
-export function ThemeToggle({ className = '', showLabel = false }: ThemeToggleProps) {
+export function ThemeToggle({ className = '', showLabel = false, locale = 'pt' }: ThemeToggleProps) {
   const [theme, setTheme] = useState<Theme>('dark')
+  const nextTheme = useMemo<Theme>(() => (theme === 'dark' ? 'light' : 'dark'), [theme])
+  const copy: Record<
+    Locale,
+    { activateLight: string; activateDark: string; darkTheme: string; lightTheme: string }
+  > = {
+    pt: {
+      activateLight: 'Ativar modo claro',
+      activateDark: 'Ativar modo escuro',
+      darkTheme: 'Tema escuro',
+      lightTheme: 'Tema claro',
+    },
+    en: {
+      activateLight: 'Enable light mode',
+      activateDark: 'Enable dark mode',
+      darkTheme: 'Dark theme',
+      lightTheme: 'Light theme',
+    },
+    es: {
+      activateLight: 'Activar modo claro',
+      activateDark: 'Activar modo oscuro',
+      darkTheme: 'Tema oscuro',
+      lightTheme: 'Tema claro',
+    },
+    fr: {
+      activateLight: 'Activer le mode clair',
+      activateDark: 'Activer le mode sombre',
+      darkTheme: 'Theme sombre',
+      lightTheme: 'Theme clair',
+    },
+    it: {
+      activateLight: 'Attiva modalita chiara',
+      activateDark: 'Attiva modalita scura',
+      darkTheme: 'Tema scuro',
+      lightTheme: 'Tema chiaro',
+    },
+  }
+  const labels = copy[locale] ?? copy.pt
+
+  const toggleLabel = nextTheme === 'light' ? labels.activateLight : labels.activateDark
 
   useEffect(() => {
     const onThemeChange = (event: Event) => {
@@ -72,7 +113,10 @@ export function ThemeToggle({ className = '', showLabel = false }: ThemeTogglePr
 
       if (nextTheme === 'light' || nextTheme === 'dark') {
         setTheme(nextTheme)
-        document.documentElement.setAttribute('data-theme', nextTheme)
+        const root = document.documentElement
+        root.setAttribute('data-theme', nextTheme)
+        root.classList.remove('theme-light', 'theme-dark')
+        root.classList.add(nextTheme === 'light' ? 'theme-light' : 'theme-dark')
       }
     }
 
@@ -88,8 +132,6 @@ export function ThemeToggle({ className = '', showLabel = false }: ThemeTogglePr
     }
   }, [])
 
-  const nextTheme = useMemo<Theme>(() => (theme === 'dark' ? 'light' : 'dark'), [theme])
-
   return (
     <button
       type="button"
@@ -98,11 +140,11 @@ export function ThemeToggle({ className = '', showLabel = false }: ThemeTogglePr
         applyTheme(nextTheme)
       }}
       className={`theme-toggle focus-ring inline-flex items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold ${className}`.trim()}
-      aria-label={`Ativar modo ${nextTheme === 'light' ? 'claro' : 'escuro'}`}
-      title={`Ativar modo ${nextTheme === 'light' ? 'claro' : 'escuro'}`}
+      aria-label={toggleLabel}
+      title={toggleLabel}
     >
       {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-      {showLabel ? <span>{theme === 'dark' ? 'Tema escuro' : 'Tema claro'}</span> : null}
+      {showLabel ? <span>{theme === 'dark' ? labels.darkTheme : labels.lightTheme}</span> : null}
     </button>
   )
 }

@@ -2,10 +2,23 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { ArrowUp } from 'phosphor-react'
+import type { Locale } from '@/data/i18n'
 
-export function RedirectTop() {
+type RedirectTopProps = {
+  locale?: Locale
+}
+
+export function RedirectTop({ locale = 'pt' }: RedirectTopProps) {
   const [visible, setVisible] = useState(false)
   const [progress, setProgress] = useState(0)
+
+  const labelByLocale: Record<Locale, string> = {
+    pt: 'Voltar ao topo',
+    en: 'Back to top',
+    es: 'Volver arriba',
+    fr: 'Retour en haut',
+    it: 'Torna in alto',
+  }
 
   useEffect(() => {
     const update = () => {
@@ -43,7 +56,7 @@ export function RedirectTop() {
           behavior: 'smooth',
         })
       }}
-      aria-label="Voltar ao topo"
+      aria-label={labelByLocale[locale]}
     >
       <span className="theme-scroll-button inline-flex h-full w-full items-center justify-center rounded-full border border-white/15 text-amber-300 transition">
         <ArrowUp size={18} weight="bold" />

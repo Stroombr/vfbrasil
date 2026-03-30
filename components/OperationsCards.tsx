@@ -20,58 +20,58 @@ type Scenario = {
 const scenarios: Scenario[] = [
   {
     id: 'disponibilidade',
-    label: 'Cenario 01',
+    label: 'Cenário 01',
     title: 'Queda de disponibilidade da linha',
-    summary: 'Paradas recorrentes reduzem produtividade e aumentam custo de manutencao corretiva.',
+    summary: 'Paradas recorrentes reduzem produtividade e aumentam custo de manutenção corretiva.',
     impact: 'Prioridade alta',
     icon: TimerReset,
-    signs: ['Aumento de paradas nao planejadas', 'MTBF em queda', 'Equipe operando em modo reativo'],
+    signs: ['Aumento de paradas não planejadas', 'MTBF em queda', 'Equipe operando em modo reativo'],
     responsePlan: [
-      'Diagnostico tecnico dos ativos criticos',
-      'Plano de manutencao orientado por risco',
+      'Diagnóstico técnico dos ativos críticos',
+      'Plano de manutenção orientado por risco',
       'Acompanhamento dos indicadores de disponibilidade',
     ],
   },
   {
     id: 'pecas',
-    label: 'Cenario 02',
-    title: 'Lead time longo para pecas',
-    summary: 'Dependencia de importados compromete prazo, estoque e previsibilidade operacional.',
-    impact: 'Prioridade media-alta',
+    label: 'Cenário 02',
+    title: 'Lead time longo para peças',
+    summary: 'Dependência de importados compromete prazo, estoque e previsibilidade operacional.',
+    impact: 'Prioridade média-alta',
     icon: Wrench,
-    signs: ['Reposicao lenta de componentes', 'Estoque de seguranca elevado', 'Risco de parada por falta de item'],
+    signs: ['Reposição lenta de componentes', 'Estoque de segurança elevado', 'Risco de parada por falta de item'],
     responsePlan: [
       'Mapeamento de itens de maior criticidade',
-      'Engenharia reversa e validacao tecnica',
-      'Nacionalizacao progressiva com controle de qualidade',
+      'Engenharia reversa e validação técnica',
+      'Nacionalização progressiva com controle de qualidade',
     ],
   },
   {
     id: 'implantacao',
-    label: 'Cenario 03',
-    title: 'Implantacao de projeto industrial',
-    summary: 'Start-up exige coordenacao tecnica para reduzir riscos na fase de comissionamento.',
-    impact: 'Prioridade estrategica',
+    label: 'Cenário 03',
+    title: 'Implantação de projeto industrial',
+    summary: 'Start-up exige coordenação técnica para reduzir riscos na fase de comissionamento.',
+    impact: 'Prioridade estratégica',
     icon: Factory,
     signs: ['Cronograma pressionado', 'Dependencia de alinhamento entre frentes', 'Risco de retrabalho na partida'],
     responsePlan: [
-      'Planejamento executivo de montagem e supervisao',
-      'Checklists tecnicos por etapa',
-      'Suporte de campo para estabilizacao inicial',
+      'Planejamento executivo de montagem e supervisão',
+      'Checklists técnicos por etapa',
+      'Suporte de campo para estabilização inicial',
     ],
   },
   {
     id: 'conformidade',
-    label: 'Cenario 04',
-    title: 'Adequacao tecnica e conformidade',
-    summary: 'Necessidade de elevar seguranca operacional e aderencia a normas aplicaveis.',
+    label: 'Cenário 04',
+    title: 'Adequação técnica e conformidade',
+    summary: 'Necessidade de elevar segurança operacional e aderência a normas aplicáveis.',
     impact: 'Prioridade regulatoria',
     icon: ShieldCheck,
-    signs: ['Pontos de nao conformidade', 'Auditorias com pendencias', 'Incerteza em requisitos tecnicos'],
+    signs: ['Pontos de não conformidade', 'Auditorias com pendências', 'Incerteza em requisitos técnicos'],
     responsePlan: [
-      'Avaliacao tecnica de conformidade operacional',
-      'Plano de adequacao por criticidade',
-      'Documentacao de suporte para rastreabilidade',
+      'Avaliação técnica de conformidade operacional',
+      'Plano de adequação por criticidade',
+      'Documentação de suporte para rastreabilidade',
     ],
   },
 ]
@@ -89,7 +89,7 @@ export function OperationsCards() {
   )
 
   const whatsappLink = buildWhatsappLink(
-    `Ola, gostaria de apoio da ${companyProfile.brandName}. Cenario: ${activeScenario.title}.`,
+    `Olá, gostaria de apoio da ${companyProfile.brandName}. Cenário: ${activeScenario.title}.`,
   )
 
   return (
@@ -98,7 +98,7 @@ export function OperationsCards() {
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="mt-4 text-2xl font-semibold text-white sm:text-4xl">Selecione o desafio para receber a resposta recomendada</h2>
           <p className="mt-5 text-sm leading-7 text-slate-300 sm:text-base">
-            Escolha um cenario, veja o plano de resposta e avance para contato tecnico.
+            Escolha um cenário, veja o plano de resposta e avance para contato técnico.
           </p>
         </div>
 
@@ -153,7 +153,7 @@ export function OperationsCards() {
                   type="button"
                   onClick={() => setActiveId(scenarios[(activeIndex - 1 + scenarios.length) % scenarios.length].id)}
                   className="focus-ring inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-white/5 text-slate-100 transition hover:bg-white/10"
-                  aria-label="Cenario anterior"
+                  aria-label="Cenário anterior"
                 >
                   <ChevronLeft className="h-4 w-4" />
                 </button>
@@ -161,7 +161,7 @@ export function OperationsCards() {
                   type="button"
                   onClick={() => setActiveId(scenarios[(activeIndex + 1) % scenarios.length].id)}
                   className="focus-ring inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-white/5 text-slate-100 transition hover:bg-white/10"
-                  aria-label="Proximo cenario"
+                  aria-label="Próximo cenário"
                 >
                   <ChevronRight className="h-4 w-4" />
                 </button>
@@ -196,7 +196,7 @@ export function OperationsCards() {
                 rel="noreferrer"
                 className="focus-ring inline-flex w-full items-center justify-center gap-2 rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-amber-400 sm:w-auto"
               >
-                Enviar este cenario
+                Enviar este cenário
               </Link>
               <Link
                 href="#contato"
@@ -225,5 +225,6 @@ export function OperationsCards() {
     </section>
   )
 }
+
 
 

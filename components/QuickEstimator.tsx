@@ -19,9 +19,9 @@ type Recommendation = {
 
 const challengeLabels: Record<Challenge, string> = {
   manutencao: 'Paradas e confiabilidade',
-  pecas: 'Lead time de pecas',
-  projeto: 'Implantacao de novo projeto',
-  nacionalizacao: 'Dependencia de importados',
+  pecas: 'Lead time de peças',
+  projeto: 'Implantação de novo projeto',
+  nacionalizacao: 'Dependência de importados',
 }
 
 const autoScenarios: Array<{
@@ -31,13 +31,13 @@ const autoScenarios: Array<{
   complexity: number
 }> = [
   {
-    label: 'Linha com parada critica',
+    label: 'Linha com parada crítica',
     challenge: 'manutencao',
     urgency: 'alta',
     complexity: 5,
   },
   {
-    label: 'Reposicao de componentes',
+    label: 'Reposição de componentes',
     challenge: 'pecas',
     urgency: 'media',
     complexity: 4,
@@ -49,7 +49,7 @@ const autoScenarios: Array<{
     complexity: 3,
   },
   {
-    label: 'Nacionalizacao prioritaria',
+    label: 'Nacionalização prioritária',
     challenge: 'nacionalizacao',
     urgency: 'alta',
     complexity: 4,
@@ -62,47 +62,47 @@ function calculateRecommendation(challenge: Challenge, urgency: Urgency, complex
 
   if (challenge === 'manutencao') {
     return {
-      title: score >= 8 ? 'Plano de intervencao prioritaria' : 'Plano de manutencao estruturada',
+      title: score >= 8 ? 'Plano de intervenção prioritária' : 'Plano de manutenção estruturada',
       description:
         score >= 8
-          ? 'Recomendamos diagnostico em campo com foco em ativos criticos e reducao de risco de parada.'
-          : 'Recomendamos agenda preventiva com acompanhamento tecnico para estabilidade de operacao.',
-      service: 'Manutencao de equipamentos',
+          ? 'Recomendamos diagnóstico em campo com foco em ativos críticos e redução de risco de parada.'
+          : 'Recomendamos agenda preventiva com acompanhamento técnico para estabilidade de operação.',
+      service: 'Manutenção de equipamentos',
       priority: score >= 8 ? 'Alta' : 'Media',
     }
   }
 
   if (challenge === 'pecas') {
     return {
-      title: 'Trilha de reposicao inteligente',
+      title: 'Trilha de reposição inteligente',
       description:
         score >= 8
-          ? 'Sugestao: mapa de itens criticos com reposicao imediata e plano de estoque minimo.'
-          : 'Sugestao: revisao de portfolio de sobressalentes para ganho de previsibilidade e prazo.',
-      service: 'Nacionalizacao de pecas',
+          ? 'Sugestão: mapa de itens críticos com reposição imediata e plano de estoque mínimo.'
+          : 'Sugestão: revisão de portfólio de sobressalentes para ganho de previsibilidade e prazo.',
+      service: 'Nacionalização de peças',
       priority: score >= 8 ? 'Alta' : 'Media',
     }
   }
 
   if (challenge === 'projeto') {
     return {
-      title: 'Roadmap de implantacao assistida',
+      title: 'Roadmap de implantação assistida',
       description:
         score >= 8
-          ? 'Indicamos kick-off tecnico com supervisao dedicada para start-up seguro e rapido.'
-          : 'Indicamos plano de implantacao por fases com checkpoints de qualidade e desempenho.',
-      service: 'Montagem e supervisao de campo',
+          ? 'Indicamos kick-off técnico com supervisão dedicada para start-up seguro e rápido.'
+          : 'Indicamos plano de implantação por fases com checkpoints de qualidade e desempenho.',
+      service: 'Montagem e supervisão de campo',
       priority: score >= 8 ? 'Alta' : 'Media',
     }
   }
 
   return {
-    title: score >= 8 ? 'Programa de nacionalizacao acelerada' : 'Programa de nacionalizacao progressiva',
+    title: score >= 8 ? 'Programa de nacionalização acelerada' : 'Programa de nacionalização progressiva',
     description:
       score >= 8
-        ? 'Recomendamos iniciar com itens de maior impacto operacional para reduzir dependencia externa rapidamente.'
-        : 'Recomendamos um lote piloto com validacao tecnica antes de escalar nacionalizacao.',
-    service: 'Tropicalizacao e nacionalizacao de projetos',
+        ? 'Recomendamos iniciar com itens de maior impacto operacional para reduzir dependência externa rapidamente.'
+        : 'Recomendamos um lote piloto com validação técnica antes de escalar nacionalização.',
+    service: 'Tropicalização e nacionalização de projetos',
     priority: score >= 8 ? 'Alta' : 'Media',
   }
 }
@@ -143,7 +143,7 @@ export function QuickEstimator() {
 
   const autoProgress = ((scenarioIndex + 1) / autoScenarios.length) * 100
   const whatsappLink = buildWhatsappLink(
-    `Ola, preciso de apoio da ${companyProfile.brandName}. Contexto: ${challengeLabels[challenge]}. Urgencia: ${urgency}. Complexidade: ${complexity}/5.`,
+    `Olá, preciso de apoio da ${companyProfile.brandName}. Contexto: ${challengeLabels[challenge]}. Urgência: ${urgency}. Complexidade: ${complexity}/5.`,
   )
 
   return (
@@ -153,24 +153,24 @@ export function QuickEstimator() {
           <div className="flex flex-wrap items-center justify-between gap-3">
             <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-amber-300">
               <Gauge className="h-4 w-4" />
-              Diagnostico rapido
+              Diagnóstico rápido
             </p>
           </div>
 
           <h2 className="text-3xl font-semibold text-white sm:text-4xl">Simule o melhor ponto de partida</h2>
           <p className="text-sm leading-7 text-slate-300 sm:text-base">
-            Ferramenta objetiva para priorizar atendimento tecnico em menos de um minuto.
+            Ferramenta objetiva para priorizar atendimento técnico em menos de um minuto.
           </p>
           {prefersReducedMotion ? (
             <p className="text-xs text-slate-400">
-              Movimento automatico reduzido por configuracao de acessibilidade do dispositivo.
+              Movimento automático reduzido por configuração de acessibilidade do dispositivo.
             </p>
           ) : null}
 
           <div className="rounded-xl border border-white/10 bg-white/5 p-4">
             <div className="mb-2 flex items-center justify-between text-xs">
               <span className="font-semibold uppercase tracking-[0.12em] text-amber-300">
-                {shouldAutoPilot ? 'Cenario em rotacao' : 'Cenario manual'}
+                {shouldAutoPilot ? 'Cenário em rotação' : 'Cenário manual'}
               </span>
               <span className="text-slate-300">
                 {shouldAutoPilot ? `${scenarioIndex + 1}/${autoScenarios.length}` : 'Personalizado'}
@@ -186,12 +186,12 @@ export function QuickEstimator() {
           </div>
 
           <div className="rounded-xl border border-white/10 bg-white/5 p-4">
-            <p className="text-xs uppercase tracking-[0.16em] text-slate-400">Diagnostico atual</p>
+            <p className="text-xs uppercase tracking-[0.16em] text-slate-400">Diagnóstico atual</p>
             <h3 className="mt-2 text-lg font-semibold text-white">{recommendation.title}</h3>
             <p className="mt-3 text-sm leading-7 text-slate-300">{recommendation.description}</p>
             <div className="mt-4 flex flex-wrap gap-2 text-xs">
               <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-slate-200">
-                Servico: {recommendation.service}
+                Serviço: {recommendation.service}
               </span>
               <span className="rounded-full border border-amber-300/35 bg-amber-400/10 px-3 py-1 text-amber-200">
                 Prioridade: {recommendation.priority}
@@ -206,7 +206,7 @@ export function QuickEstimator() {
             className="focus-ring inline-flex items-center gap-2 rounded-lg bg-amber-500 px-5 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-amber-400"
           >
             <Sparkles className="h-4 w-4" />
-            Enviar diagnostico no WhatsApp
+            Enviar diagnóstico no WhatsApp
           </Link>
         </div>
 
@@ -232,7 +232,7 @@ export function QuickEstimator() {
           </div>
 
           <div>
-            <label className="mb-2 block text-sm font-medium text-slate-200">Nivel de urgencia</label>
+            <label className="mb-2 block text-sm font-medium text-slate-200">Nível de urgência</label>
             <div className="grid grid-cols-3 gap-2">
               {(['baixa', 'media', 'alta'] as Urgency[]).map((item) => (
                 <button
@@ -274,7 +274,7 @@ export function QuickEstimator() {
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-amber-300">Resumo de entrada</p>
             <div className="mt-3 grid gap-2 text-sm text-slate-200 sm:grid-cols-2">
               <p>Desafio: {challengeLabels[challenge]}</p>
-              <p>Urgencia: {urgency}</p>
+              <p>Urgência: {urgency}</p>
               <p>Complexidade: {complexity}/5</p>
               <p>Prioridade sugerida: {recommendation.priority}</p>
             </div>
@@ -284,5 +284,6 @@ export function QuickEstimator() {
     </section>
   )
 }
+
 
 

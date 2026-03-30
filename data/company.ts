@@ -8,37 +8,37 @@ export type CompanyLocation = {
 
 export const companyProfile = {
   brandName: 'VF Brasil',
-  legalName: 'VF BRASIL COMERCIO E SERVICOS LTDA',
+  legalName: 'VF BRASIL COMÉRCIO E SERVIÇOS LTDA',
   linkedinCompanyUrl: 'https://www.linkedin.com/company/vf-do-brasil-ltda/',
   overview:
-    'A VF Brasil atua no setor siderurgico com foco em desempenho operacional, qualidade tecnica e desenvolvimento sustentavel.',
+    'A VF Brasil atua no setor siderúrgico com foco em desempenho operacional, qualidade técnica e desenvolvimento sustentável.',
   industry: 'Industrial Machinery Manufacturing',
-  companySize: '11-50 colaboradores',
+  companySize: '+ 50 colaboradores',
   foundedYear: 2015,
   phoneDisplay: '(11) 99365-2159',
   phoneRaw: '011993652159',
   whatsappPhoneIntl: '5511993652159',
   specialties: [
-    'Fabricacao de maquinas',
+    'Fabricação de máquinas',
     'Engenharia reversa',
     'Consultoria',
     'Melhoria de processos industriais',
   ],
   servicesSummary:
-    'Prestacao de servicos em engenharia reversa, fabricacao de maquinas e pecas, dispositivos e suporte tecnico para siderurgia.',
+    'Prestação de serviços em engenharia reversa, fabricação de máquinas e peças, dispositivos e suporte técnico para siderurgia.',
   workplacePolicy: 'Onsite',
 } as const
 
 export const companyLocations: CompanyLocation[] = [
   {
-    name: 'Matriz - Varzea Paulista',
+    name: 'Matriz - Várzea Paulista',
     address: 'R. Marginal, 300 - Setor Industrial',
-    cityState: 'Varzea Paulista - SP',
+    cityState: 'Várzea Paulista - SP',
     zipCode: '13224-000',
     mapsUrl: 'https://www.google.com/maps/search/?api=1&query=R.+Marginal%2C+300%2C+Varzea+Paulista%2C+SP',
   },
   {
-    name: 'VF Brasil Fabrica Diadema',
+    name: 'VF Brasil Fábrica Diadema',
     address: 'Rua Bahia, 123',
     cityState: 'Diadema - SP',
     zipCode: '09941-740',

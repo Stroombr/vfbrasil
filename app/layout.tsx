@@ -4,6 +4,30 @@ import { Manrope, Sora } from 'next/font/google'
 
 import { PageProgressBar } from '@/components/PageProgressBar'
 import { companyProfile } from '@/data/company'
+import { toHtmlLang } from '@/data/i18n'
+import { getRequestLocale } from '@/data/i18n.server'
+
+const themeBootstrapScript = `
+(() => {
+  try {
+    const storageKey = 'vf-theme'
+    const stored = window.localStorage.getItem(storageKey)
+    const theme =
+      stored === 'light' || stored === 'dark'
+        ? stored
+        : window.matchMedia('(prefers-color-scheme: light)').matches
+          ? 'light'
+          : 'dark'
+
+    const root = document.documentElement
+    root.setAttribute('data-theme', theme)
+    root.classList.remove('theme-light', 'theme-dark')
+    root.classList.add(theme === 'light' ? 'theme-light' : 'theme-dark')
+  } catch (_error) {
+    // keep default server theme
+  }
+})()
+`
 
 const heading = Sora({
   subsets: ['latin'],
@@ -32,7 +56,7 @@ const organizationJsonLd = {
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'R. Marginal, 300 - Setor Industrial',
-    addressLocality: 'Varzea Paulista',
+    addressLocality: 'Várzea Paulista',
     addressRegion: 'SP',
     postalCode: '13224-000',
     addressCountry: 'BR',
@@ -49,33 +73,46 @@ export const metadata: Metadata = {
     'engenharia industrial',
     'siderurgia',
     'engenharia reversa',
-    'fabricacao de maquinas',
-    'nacionalizacao de pecas',
-    'manutencao industrial',
+    'fabricação de máquinas',
+    'nacionalização de peças',
+    'manutenção industrial',
   ],
   openGraph: {
     type: 'website',
     title: 'VF Brasil',
     siteName: 'VF Brasil',
     locale: 'pt_BR',
-    description: 'Solucoes tecnicas para disponibilidade operacional, prazo e confiabilidade.',
+    description: 'Soluções técnicas para disponibilidade operacional, prazo e confiabilidade.',
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const locale = await getRequestLocale()
+
+  const skipByLocale = {
+    pt: 'Pular para o conteúdo principal',
+    en: 'Skip to main content',
+    es: 'Saltar al contenido principal',
+    fr: 'Aller au contenu principal',
+    it: 'Vai al contenuto principale',
+  } as const
+
   return (
-    <html lang="pt-BR" data-theme="dark" className="theme-dark">
+    <html lang={toHtmlLang(locale)} data-theme="dark" className="theme-dark" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeBootstrapScript }} />
+      </head>
       <body className={`${heading.variable} ${body.variable} antialiased`}>
         <PageProgressBar />
         <a
           href="#conteudo-principal"
           className="focus-ring sr-only absolute left-3 top-3 z-[100] rounded-md bg-amber-400 px-3 py-2 text-sm font-semibold text-slate-950 focus:not-sr-only"
         >
-          Pular para o conteudo principal
+          {skipByLocale[locale]}
         </a>
         {children}
         <script
@@ -86,5 +123,4 @@ export default function RootLayout({
     </html>
   )
 }
-
 

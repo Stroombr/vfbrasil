@@ -16,54 +16,54 @@ interface ServiceItem {
 
 const categoryLabels: Record<CategoryFilter, string> = {
   todos: 'Todos',
-  fabricacao: 'Fabricacao',
-  manutencao: 'Manutencao',
+  fabricacao: 'Fabricação',
+  manutencao: 'Manutenção',
   engenharia: 'Engenharia',
-  implantacao: 'Implantacao',
+  implantacao: 'Implantação',
 }
 
 const cards: ServiceItem[] = [
   {
     id: 1,
     category: 'fabricacao',
-    title: 'Fabricacao de pecas originais',
-    subtitle: 'Componentes com rigor tecnico e total aderencia as especificacoes de fabrica.',
+    title: 'Fabricação de peças originais',
+    subtitle: 'Componentes com rigor técnico e total aderência às especificações de fábrica.',
     details: 'Controle dimensional, rastreabilidade e plano de qualidade para desempenho consistente em campo.',
   },
   {
     id: 2,
     category: 'engenharia',
-    title: 'Servico tecnico especializado',
-    subtitle: 'Consultoria e execucao para desafios complexos em ambientes industriais de alta exigencia.',
-    details: 'Diagnostico tecnico, plano de acao e execucao assistida por especialistas em equipamentos criticos.',
+    title: 'Serviço técnico especializado',
+    subtitle: 'Consultoria e execução para desafios complexos em ambientes industriais de alta exigência.',
+    details: 'Diagnóstico técnico, plano de ação e execução assistida por especialistas em equipamentos críticos.',
   },
   {
     id: 3,
     category: 'manutencao',
-    title: 'Manutencao de equipamentos',
-    subtitle: 'Atuacao preditiva e corretiva para reduzir paradas e ampliar disponibilidade operacional.',
-    details: 'Metodologia orientada por risco e indicadores para aumentar MTBF e reduzir tempo de intervencao.',
+    title: 'Manutenção de equipamentos',
+    subtitle: 'Atuação preditiva e corretiva para reduzir paradas e ampliar disponibilidade operacional.',
+    details: 'Metodologia orientada por risco e indicadores para aumentar MTBF e reduzir tempo de intervenção.',
   },
   {
     id: 4,
     category: 'engenharia',
-    title: 'Tropicalizacao e nacionalizacao de projetos',
-    subtitle: 'Adaptacao completa de projetos globais para normas e realidade operacional brasileira.',
-    details: 'Adequacao a NRs, documentacao local e ajustes tecnicos para confianca operacional de longo prazo.',
+    title: 'Tropicalização e nacionalização de projetos',
+    subtitle: 'Adaptação completa de projetos globais para normas e realidade operacional brasileira.',
+    details: 'Adequação a NRs, documentação local e ajustes técnicos para confiança operacional de longo prazo.',
   },
   {
     id: 5,
     category: 'fabricacao',
-    title: 'Nacionalizacao de pecas',
-    subtitle: 'Substituicao inteligente de importados com performance equivalente e lead time reduzido.',
-    details: 'Engenharia aplicada para reduzir dependencia externa com ganho de prazo e previsibilidade de custo.',
+    title: 'Nacionalização de peças',
+    subtitle: 'Substituição inteligente de importados com performance equivalente e lead time reduzido.',
+    details: 'Engenharia aplicada para reduzir dependência externa com ganho de prazo e previsibilidade de custo.',
   },
   {
     id: 6,
     category: 'implantacao',
-    title: 'Montagem e supervisao de campo',
-    subtitle: 'Gestao tecnica da implantacao para garantir partida segura e performance desde o primeiro dia.',
-    details: 'Comissionamento, checklist tecnico e suporte em start-up para acelerar curva de estabilidade.',
+    title: 'Montagem e supervisão de campo',
+    subtitle: 'Gestão técnica da implantação para garantir partida segura e performance desde o primeiro dia.',
+    details: 'Comissionamento, checklist técnico e suporte em start-up para acelerar curva de estabilidade.',
   },
 ]
 
@@ -81,7 +81,7 @@ function ServiceCard({ item, index, expanded, onToggle }: ServiceCardProps) {
       data-service-index={index}
       className="surface-panel min-w-[260px] snap-center rounded-2xl p-5 sm:min-w-[340px] sm:p-6 lg:min-w-[390px]"
     >
-      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-300">Servico {item.id}</p>
+      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-300">Serviço {item.id}</p>
       <h3 className="mt-4 text-xl font-semibold leading-snug text-white sm:text-2xl">{item.title}</h3>
       <p className="mt-4 text-sm leading-7 text-slate-300">{item.subtitle}</p>
 
@@ -232,10 +232,10 @@ export function EnhancedCarousel() {
   return (
     <div id="servicos" className="space-y-8">
       <div className="mx-auto max-w-3xl text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-300">Solucoes de engenharia</p>
-        <h2 className="mt-4 text-2xl font-semibold text-white sm:text-4xl">Servicos para disponibilidade, prazo e confiabilidade</h2>
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-300">Soluções de engenharia</p>
+        <h2 className="mt-4 text-2xl font-semibold text-white sm:text-4xl">Serviços para disponibilidade, prazo e confiabilidade</h2>
         <p className="mt-5 text-sm leading-7 text-slate-300 sm:text-base">
-          Equipes multidisciplinares para diagnosticar, executar e acompanhar ganhos em operacoes criticas.
+          Equipes multidisciplinares para diagnosticar, executar e acompanhar ganhos em operações críticas.
         </p>
       </div>
 
@@ -265,14 +265,14 @@ export function EnhancedCarousel() {
         <button
           onClick={() => scroll('left')}
           className="focus-ring inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white transition hover:bg-white/15"
-          aria-label="Rolar servicos para esquerda"
+          aria-label="Rolar serviços para esquerda"
         >
           <ChevronLeft className="h-5 w-5" />
         </button>
         <button
           onClick={() => scroll('right')}
           className="focus-ring inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white transition hover:bg-white/15"
-          aria-label="Rolar servicos para direita"
+          aria-label="Rolar serviços para direita"
         >
           <ChevronRight className="h-5 w-5" />
         </button>
@@ -293,7 +293,7 @@ export function EnhancedCarousel() {
           }
         }}
         tabIndex={0}
-        aria-label="Carrossel de servicos"
+        aria-label="Carrossel de serviços"
       >
         {filteredCards.map((item, index) => (
           <ServiceCard
@@ -315,12 +315,13 @@ export function EnhancedCarousel() {
             className={`focus-ring h-2.5 rounded-full transition-all ${
               activeIndex === index ? 'w-7 bg-amber-400' : 'w-2.5 bg-white/25 hover:bg-white/40'
             }`}
-            aria-label={`Ir para servico ${item.id}`}
+            aria-label={`Ir para serviço ${item.id}`}
           />
         ))}
       </div>
     </div>
   )
 }
+
 
 

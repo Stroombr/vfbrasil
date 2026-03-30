@@ -4,6 +4,7 @@ import Image, { type ImageProps } from 'next/image'
 import Link from 'next/link'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import type { Locale } from '@/data/i18n'
 
 type Person = {
   label: string
@@ -14,10 +15,12 @@ type Person = {
 }
 
 type PeopleShowcaseProps = {
+  id?: string
+  locale: Locale
   people: readonly Person[]
 }
 
-export function PeopleShowcase({ people }: PeopleShowcaseProps) {
+export function PeopleShowcase({ id, locale, people }: PeopleShowcaseProps) {
   const trackRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const [canGoLeft, setCanGoLeft] = useState(false)
@@ -115,16 +118,81 @@ export function PeopleShowcase({ people }: PeopleShowcaseProps) {
 
   const visiblePeople = useMemo(() => people.filter(Boolean), [people])
 
+  const copy: Record<
+    Locale,
+    {
+      eyebrow: string
+      title: string
+      previousPeople: string
+      nextPeople: string
+      carouselLabel: string
+      viewProfile: string
+      goToPerson: string
+      personPhoto: string
+    }
+  > = {
+    pt: {
+      eyebrow: 'Time',
+      title: 'Especialistas que lideram a entrega',
+      previousPeople: 'Ver pessoas anteriores',
+      nextPeople: 'Ver próximas pessoas',
+      carouselLabel: 'Carrossel da equipe',
+      viewProfile: 'Ver perfil',
+      goToPerson: 'Ir para',
+      personPhoto: 'Foto de',
+    },
+    en: {
+      eyebrow: 'Team',
+      title: 'Specialists leading delivery',
+      previousPeople: 'View previous people',
+      nextPeople: 'View next people',
+      carouselLabel: 'Team carousel',
+      viewProfile: 'View profile',
+      goToPerson: 'Go to',
+      personPhoto: 'Photo of',
+    },
+    es: {
+      eyebrow: 'Equipo',
+      title: 'Especialistas que lideran la entrega',
+      previousPeople: 'Ver personas anteriores',
+      nextPeople: 'Ver proximas personas',
+      carouselLabel: 'Carrusel del equipo',
+      viewProfile: 'Ver perfil',
+      goToPerson: 'Ir a',
+      personPhoto: 'Foto de',
+    },
+    fr: {
+      eyebrow: 'Equipe',
+      title: 'Specialistes qui pilotent la livraison',
+      previousPeople: 'Voir les personnes precedentes',
+      nextPeople: 'Voir les personnes suivantes',
+      carouselLabel: 'Carrousel de l equipe',
+      viewProfile: 'Voir le profil',
+      goToPerson: 'Aller a',
+      personPhoto: 'Photo de',
+    },
+    it: {
+      eyebrow: 'Team',
+      title: 'Specialisti che guidano la consegna',
+      previousPeople: 'Vedi persone precedenti',
+      nextPeople: 'Vedi persone successive',
+      carouselLabel: 'Carosello del team',
+      viewProfile: 'Vedi profilo',
+      goToPerson: 'Vai a',
+      personPhoto: 'Foto di',
+    },
+  }
+
   if (visiblePeople.length === 0) {
     return null
   }
 
   return (
-    <section className="mx-auto w-full max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
-      <div className="rounded-3xl border border-white/12 bg-white/[0.02] p-6 sm:p-8">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-300">Time</p>
-          <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">Especialistas que lideram a entrega</h2>
+    <section id={id} className="vf-shell pb-12">
+      <div className="surface-panel rounded-3xl p-6 sm:p-8">
+        <div className="vf-heading-center">
+          <p className="vf-eyebrow">{copy[locale].eyebrow}</p>
+          <h2 className="vf-title sm:text-4xl">{copy[locale].title}</h2>
         </div>
 
         <div className="relative mt-8">
@@ -132,7 +200,7 @@ export function PeopleShowcase({ people }: PeopleShowcaseProps) {
             type="button"
             onClick={() => scrollByDirection('left')}
             disabled={!canGoLeft}
-            aria-label="Ver pessoas anteriores"
+            aria-label={copy[locale].previousPeople}
             className="focus-ring absolute -left-2 top-1/2 z-20 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-[#06060b]/85 text-amber-300 transition hover:bg-[#10101a] disabled:cursor-not-allowed disabled:opacity-35 md:inline-flex"
           >
             <ChevronLeft className="h-5 w-5" />
@@ -142,7 +210,7 @@ export function PeopleShowcase({ people }: PeopleShowcaseProps) {
             type="button"
             onClick={() => scrollByDirection('right')}
             disabled={!canGoRight}
-            aria-label="Ver proximas pessoas"
+            aria-label={copy[locale].nextPeople}
             className="focus-ring absolute -right-2 top-1/2 z-20 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-[#06060b]/85 text-amber-300 transition hover:bg-[#10101a] disabled:cursor-not-allowed disabled:opacity-35 md:inline-flex"
           >
             <ChevronRight className="h-5 w-5" />
@@ -151,7 +219,7 @@ export function PeopleShowcase({ people }: PeopleShowcaseProps) {
           <div
             ref={trackRef}
             className="scrollbar-hide flex snap-x snap-mandatory gap-5 overflow-x-auto pb-3"
-            aria-label="Carrossel da equipe"
+            aria-label={copy[locale].carouselLabel}
           >
             {visiblePeople.map((person, index) => (
               <article
@@ -163,7 +231,7 @@ export function PeopleShowcase({ people }: PeopleShowcaseProps) {
                 <div className="relative aspect-[3/4] overflow-hidden rounded-sm border border-white/10 bg-white/5">
                   <Image
                     src={person.image}
-                    alt={`Foto de ${person.name}`}
+                    alt={`${copy[locale].personPhoto} ${person.name}`}
                     fill
                     className="object-cover grayscale"
                     sizes="(max-width: 640px) 80vw, (max-width: 1024px) 38vw, 300px"
@@ -178,7 +246,7 @@ export function PeopleShowcase({ people }: PeopleShowcaseProps) {
                     rel="noreferrer"
                     className="focus-ring mt-4 inline-flex text-xs font-semibold uppercase tracking-[0.14em] text-amber-300 transition hover:text-amber-200"
                   >
-                    Ver perfil
+                    {copy[locale].viewProfile}
                   </Link>
                 </div>
               </article>
@@ -195,7 +263,7 @@ export function PeopleShowcase({ people }: PeopleShowcaseProps) {
               className={`focus-ring h-2.5 rounded-full transition-all ${
                 activeIndex === index ? 'w-7 bg-amber-400' : 'w-2.5 bg-white/25 hover:bg-white/40'
               }`}
-              aria-label={`Ir para ${person.name}`}
+              aria-label={`${copy[locale].goToPerson} ${person.name}`}
             />
           ))}
         </div>
@@ -203,3 +271,4 @@ export function PeopleShowcase({ people }: PeopleShowcaseProps) {
     </section>
   )
 }
+

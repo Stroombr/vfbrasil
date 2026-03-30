@@ -10,26 +10,26 @@ const sectionShell = 'mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8'
 
 const deliverySteps = [
   {
-    title: 'Diagnostico e definicao tecnica',
-    description: 'Levantamento tecnico dos pontos criticos com prioridade por impacto operacional.',
+    title: 'Diagnóstico e definição técnica',
+    description: 'Levantamento técnico dos pontos críticos com prioridade por impacto operacional.',
     icon: FileCheck2,
     outcomes: [
       'Risco operacional mapeado',
       'Plano inicial definido',
-      'Premissas tecnicas claras para decisao',
+      'Premissas técnicas claras para decisão',
     ],
   },
   {
-    title: 'Engenharia e execucao',
-    description: 'Plano tecnico com cronograma de fabricacao e acompanhamento de qualidade.',
+    title: 'Engenharia e execução',
+    description: 'Plano técnico com cronograma de fabricação e acompanhamento de qualidade.',
     icon: Factory,
-    outcomes: ['Marcos de entrega visiveis', 'Execucao com rastreabilidade', 'Menor retrabalho em campo'],
+    outcomes: ['Marcos de entrega visíveis', 'Execução com rastreabilidade', 'Menor retrabalho em campo'],
   },
   {
-    title: 'Implantacao e suporte',
-    description: 'Partida assistida e ajustes para estabilizar performance apos a entrega.',
+    title: 'Implantação e suporte',
+    description: 'Partida assistida e ajustes para estabilizar performance após a entrega.',
     icon: Handshake,
-    outcomes: ['Comissionamento assistido', 'Ajustes de performance', 'Continuidade do suporte tecnico'],
+    outcomes: ['Comissionamento assistido', 'Ajustes de performance', 'Continuidade do suporte técnico'],
   },
 ] as const
 
@@ -63,8 +63,8 @@ export function DeliveryExperience() {
         <div aria-hidden className="service-glow service-glow-b" />
 
         <div className="relative z-10 mx-auto max-w-3xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-300">Solucoes tecnicas</p>
-          <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">Experiencia ativa do metodo de entrega</h2>
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-300">Soluções técnicas</p>
+          <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">Experiência ativa do método de entrega</h2>
           <p className="mt-5 text-sm leading-7 text-slate-300 sm:text-base">
             O fluxo avanca automaticamente. Clique em qualquer etapa para explorar com mais detalhe.
           </p>
@@ -143,3 +143,4 @@ export function DeliveryExperience() {
     </section>
   )
 }
+
