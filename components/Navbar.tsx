@@ -119,7 +119,7 @@ function useNavItems() {
 function getNavLabel(locale: Locale, key: NavItem['key']) {
   const labels: Record<Locale, Record<NavItem['key'], string>> = {
     pt: {
-      home: 'Inicio',
+      home: 'Início',
       company: 'Empresa',
       team: 'Time',
       products: 'Produtos',

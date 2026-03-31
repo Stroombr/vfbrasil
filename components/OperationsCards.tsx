@@ -53,7 +53,7 @@ const scenarios: Scenario[] = [
     summary: 'Start-up exige coordenação técnica para reduzir riscos na fase de comissionamento.',
     impact: 'Prioridade estratégica',
     icon: Factory,
-    signs: ['Cronograma pressionado', 'Dependencia de alinhamento entre frentes', 'Risco de retrabalho na partida'],
+    signs: ['Cronograma pressionado', 'Dependência de alinhamento entre frentes', 'Risco de retrabalho na partida'],
     responsePlan: [
       'Planejamento executivo de montagem e supervisão',
       'Checklists técnicos por etapa',
@@ -65,7 +65,7 @@ const scenarios: Scenario[] = [
     label: 'Cenário 04',
     title: 'Adequação técnica e conformidade',
     summary: 'Necessidade de elevar segurança operacional e aderência a normas aplicáveis.',
-    impact: 'Prioridade regulatoria',
+    impact: 'Prioridade regulatória',
     icon: ShieldCheck,
     signs: ['Pontos de não conformidade', 'Auditorias com pendências', 'Incerteza em requisitos técnicos'],
     responsePlan: [

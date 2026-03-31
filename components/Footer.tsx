@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { LinkedinLogo } from 'phosphor-react'
-import { ArrowRight } from 'lucide-react'
 
 import vfLogo from './../public/vflogo.png'
 import { interpolate, type Locale } from '@/data/i18n'
@@ -18,8 +17,6 @@ export function Footer({ locale = 'pt' }: FooterProps) {
     Locale,
     {
       links: Array<{ name: string; href: string }>
-      readyToAdvance: string
-      pitch: string
       talkOnWhatsapp: string
       navigation: string
       contact: string
@@ -37,15 +34,13 @@ export function Footer({ locale = 'pt' }: FooterProps) {
   > = {
     pt: {
       links: [
-        { name: 'Inicio', href: '/' },
+        { name: 'Início', href: '/' },
         { name: 'Empresa', href: '/#overview' },
         { name: 'Time', href: '/#time' },
         { name: 'Produtos', href: '/#produtos' },
         { name: 'Unidades', href: '/#unidades' },
         { name: 'Contato', href: '/#contato' },
       ],
-      readyToAdvance: 'Pronto para avançar',
-      pitch: 'Fale com nossa equipe e receba proposta técnica para sua operação.',
       talkOnWhatsapp: 'Falar no WhatsApp',
       navigation: 'Navegação',
       contact: 'Contato',
@@ -70,8 +65,6 @@ export function Footer({ locale = 'pt' }: FooterProps) {
         { name: 'Sites', href: '/#unidades' },
         { name: 'Contact', href: '/#contato' },
       ],
-      readyToAdvance: 'Ready to move forward',
-      pitch: 'Talk to our team and receive a technical proposal for your operation.',
       talkOnWhatsapp: 'Talk on WhatsApp',
       navigation: 'Navigation',
       contact: 'Contact',
@@ -96,8 +89,6 @@ export function Footer({ locale = 'pt' }: FooterProps) {
         { name: 'Unidades', href: '/#unidades' },
         { name: 'Contacto', href: '/#contato' },
       ],
-      readyToAdvance: 'Listo para avanzar',
-      pitch: 'Hable con nuestro equipo y reciba una propuesta tecnica para su operacion.',
       talkOnWhatsapp: 'Hablar por WhatsApp',
       navigation: 'Navegacion',
       contact: 'Contacto',
@@ -122,8 +113,6 @@ export function Footer({ locale = 'pt' }: FooterProps) {
         { name: 'Unites', href: '/#unidades' },
         { name: 'Contact', href: '/#contato' },
       ],
-      readyToAdvance: 'Pret a avancer',
-      pitch: 'Parlez a notre equipe et recevez une proposition technique pour votre operation.',
       talkOnWhatsapp: 'Parler sur WhatsApp',
       navigation: 'Navigation',
       contact: 'Contact',
@@ -148,8 +137,6 @@ export function Footer({ locale = 'pt' }: FooterProps) {
         { name: 'Unita', href: '/#unidades' },
         { name: 'Contatto', href: '/#contato' },
       ],
-      readyToAdvance: 'Pronto ad avanzare',
-      pitch: 'Parla con il nostro team e ricevi una proposta tecnica per la tua operazione.',
       talkOnWhatsapp: 'Parla su WhatsApp',
       navigation: 'Navigazione',
       contact: 'Contatto',
@@ -172,22 +159,6 @@ export function Footer({ locale = 'pt' }: FooterProps) {
   return (
     <footer className="theme-footer border-t border-white/10">
       <div className="vf-shell py-14">
-        <div className="surface-panel mb-10 flex flex-col items-start justify-between gap-4 rounded-2xl p-5 sm:flex-row sm:items-center">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-300">{copy[locale].readyToAdvance}</p>
-            <p className="mt-2 text-sm text-slate-300">{copy[locale].pitch}</p>
-          </div>
-          <Link
-            href={buildWhatsappLink(whatsappMessage)}
-            target="_blank"
-            rel="noreferrer"
-            className="focus-ring inline-flex items-center gap-2 rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-amber-400"
-          >
-            {copy[locale].talkOnWhatsapp}
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-
         <div className="grid gap-10 md:grid-cols-[1.1fr_0.8fr_1fr_1fr]">
           <div>
             <Link href="/" className="focus-ring inline-flex items-center">

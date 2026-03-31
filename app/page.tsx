@@ -19,7 +19,6 @@ import andrePhoto from '../public/andre.jpg'
 import marcosPhoto from '../public/marcos.jpg'
 
 const yearsInMarket = new Date().getFullYear() - companyProfile.foundedYear
-const differentiatorTargets = ['#contato', '#produtos', '#overview'] as const
 const specialtyTargets = ['#produtos', '#produtos', '#contato', '#overview'] as const
 
 export const metadata: Metadata = {
@@ -66,15 +65,15 @@ function getTeamPeople(locale: Locale): TeamPerson[] {
   const byLocale: Record<Locale, TeamPerson[]> = {
     pt: [
       {
-        label: 'Coordenacao',
-        name: 'Marcos Jose Dosi',
-        role: 'Responsavel tecnico',
+        label: 'Coordenação',
+        name: 'Marcos José Dosi',
+        role: 'Responsável técnico',
         image: marcosPhoto,
         linkedin: 'https://www.linkedin.com/in/marcos-dosi-94a6b9141/',
       },
       {
         label: 'Comercial',
-        name: 'Andre Dosi',
+        name: 'André Dosi',
         role: 'Relacionamento e propostas',
         image: andrePhoto,
         linkedin: companyProfile.linkedinCompanyUrl,
@@ -83,14 +82,14 @@ function getTeamPeople(locale: Locale): TeamPerson[] {
     en: [
       {
         label: 'Coordination',
-        name: 'Marcos Jose Dosi',
+        name: 'Marcos José Dosi',
         role: 'Technical lead',
         image: marcosPhoto,
         linkedin: 'https://www.linkedin.com/in/marcos-dosi-94a6b9141/',
       },
       {
         label: 'Sales',
-        name: 'Andre Dosi',
+        name: 'André Dosi',
         role: 'Client relationship and proposals',
         image: andrePhoto,
         linkedin: companyProfile.linkedinCompanyUrl,
@@ -99,14 +98,14 @@ function getTeamPeople(locale: Locale): TeamPerson[] {
     es: [
       {
         label: 'Coordinacion',
-        name: 'Marcos Jose Dosi',
+        name: 'Marcos José Dosi',
         role: 'Responsable tecnico',
         image: marcosPhoto,
         linkedin: 'https://www.linkedin.com/in/marcos-dosi-94a6b9141/',
       },
       {
         label: 'Comercial',
-        name: 'Andre Dosi',
+        name: 'André Dosi',
         role: 'Relacion y propuestas',
         image: andrePhoto,
         linkedin: companyProfile.linkedinCompanyUrl,
@@ -115,14 +114,14 @@ function getTeamPeople(locale: Locale): TeamPerson[] {
     fr: [
       {
         label: 'Coordination',
-        name: 'Marcos Jose Dosi',
+        name: 'Marcos José Dosi',
         role: 'Responsable technique',
         image: marcosPhoto,
         linkedin: 'https://www.linkedin.com/in/marcos-dosi-94a6b9141/',
       },
       {
         label: 'Commercial',
-        name: 'Andre Dosi',
+        name: 'André Dosi',
         role: 'Relation client et propositions',
         image: andrePhoto,
         linkedin: companyProfile.linkedinCompanyUrl,
@@ -131,14 +130,14 @@ function getTeamPeople(locale: Locale): TeamPerson[] {
     it: [
       {
         label: 'Coordinamento',
-        name: 'Marcos Jose Dosi',
+        name: 'Marcos José Dosi',
         role: 'Responsabile tecnico',
         image: marcosPhoto,
         linkedin: 'https://www.linkedin.com/in/marcos-dosi-94a6b9141/',
       },
       {
         label: 'Commerciale',
-        name: 'Andre Dosi',
+        name: 'André Dosi',
         role: 'Relazioni e proposte',
         image: andrePhoto,
         linkedin: companyProfile.linkedinCompanyUrl,
@@ -153,8 +152,8 @@ function getUnitsCopy(locale: Locale): UnitsCopy {
   const byLocale: Record<Locale, UnitsCopy> = {
     pt: {
       unitsEyebrow: 'Unidades',
-      unitsTitle: 'Presenca em Sao Paulo',
-      onsiteVisits: 'Atendimentos onsite',
+      unitsTitle: 'Presença em São Paulo',
+      onsiteVisits: 'Atendimentos on-site',
       viewRoute: 'Ver rota',
     },
     en: {
@@ -421,31 +420,6 @@ export default async function Home() {
           </section>
         </SectionReveal>
 
-        <SectionReveal delayMs={30}>
-          <section className="vf-shell pb-14 sm:pb-16">
-            <div className="grid gap-4 md:grid-cols-3">
-              {copy.differentiators.map((item, index) => (
-                <Link
-                  key={item.title}
-                  href={differentiatorTargets[index] ?? '#contato'}
-                  className="focus-ring group surface-panel relative block rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-amber-300/40 hover:bg-white/10 active:scale-[0.99]"
-                  aria-label={item.title}
-                >
-                  <span className="absolute left-6 top-0 h-1.5 w-16 -translate-y-1/2 rounded-full bg-amber-500" />
-                  <div className="flex items-start justify-between gap-3">
-                    <span className="inline-flex rounded-lg border border-white/15 bg-white/10 p-2 text-amber-300 transition group-hover:border-amber-300/35 group-hover:bg-amber-400/10">
-                      <item.icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
-                    </span>
-                    <ArrowUpRight className="h-4 w-4 text-amber-300 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </div>
-                  <h3 className="mt-4 text-xl font-semibold text-white">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-300">{item.description}</p>
-                </Link>
-              ))}
-            </div>
-          </section>
-        </SectionReveal>
-
         <SectionReveal delayMs={40}>
           <PeopleShowcase id="time" locale={locale} people={teamPeople} />
         </SectionReveal>
@@ -529,18 +503,6 @@ export default async function Home() {
                   <p className="vf-copy">{copy.contactDescription}</p>
                 </div>
 
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
-                  {copy.differentiators.map((item) => (
-                    <article key={item.title} className="surface-panel relative rounded-2xl p-4">
-                      <span className="absolute left-4 top-0 h-1 w-12 -translate-y-1/2 rounded-full bg-amber-500" />
-                      <span className="inline-flex rounded-lg border border-white/15 bg-white/10 p-2 text-amber-300">
-                        <item.icon className="h-4 w-4" />
-                      </span>
-                      <h3 className="mt-3 text-sm font-semibold text-white">{item.title}</h3>
-                      <p className="mt-2 text-xs leading-6 text-slate-300">{item.description}</p>
-                    </article>
-                  ))}
-                </div>
               </div>
               <Tabs locale={locale} className="mt-0 max-w-none" />
             </div>

@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrowRight, MessageCircleMore, X } from 'lucide-react'
 
 import { interpolate, type Locale } from '@/data/i18n'
@@ -49,12 +49,12 @@ type Copy = {
 const products: Product[] = [
   {
     id: 'laminador',
-    name: 'Conjunto para linha de laminacao',
+    name: 'Conjunto para linha de laminação',
     category: 'maquinas',
     leadTime: '45-60 dias',
-    summary: 'Estrutura robusta para operacao continua em ambiente siderurgico de alta demanda.',
-    specs: ['Projeto customizado por capacidade', 'Fabricacao com controle dimensional', 'Comissionamento assistido'],
-    applications: ['Laminacao a quente', 'Upgrade de linhas existentes'],
+    summary: 'Estrutura robusta para operação contínua em ambiente siderúrgico de alta demanda.',
+    specs: ['Projeto customizado por capacidade', 'Fabricação com controle dimensional', 'Comissionamento assistido'],
+    applications: ['Laminação a quente', 'Upgrade de linhas existentes'],
     images: [
       { src: '/teste.jpg', position: 'center 22%' },
       { src: '/home-bg.jpg', position: 'center 32%' },
@@ -64,12 +64,12 @@ const products: Product[] = [
   },
   {
     id: 'transportador',
-    name: 'Modulo transportador industrial',
+    name: 'Módulo transportador industrial',
     category: 'maquinas',
     leadTime: '30-45 dias',
-    summary: 'Movimentacao segura de material com foco em disponibilidade e manutencao simplificada.',
-    specs: ['Estrutura modular', 'Integra sensores e intertravamentos', 'Entrega com documentacao tecnica'],
-    applications: ['Fluxo entre processos', 'Linhas com operacao 24/7'],
+    summary: 'Movimentação segura de material com foco em disponibilidade e manutenção simplificada.',
+    specs: ['Estrutura modular', 'Integra sensores e intertravamentos', 'Entrega com documentação técnica'],
+    applications: ['Fluxo entre processos', 'Linhas com operação 24/7'],
     images: [
       { src: '/home-bg.jpg', position: 'center 40%' },
       { src: '/teste.jpg', position: 'center 42%' },
@@ -82,9 +82,9 @@ const products: Product[] = [
     name: 'Kit de roletes e eixos nacionalizados',
     category: 'pecas',
     leadTime: '15-25 dias',
-    summary: 'Substituicao de importados com desempenho equivalente e menor dependencia externa.',
-    specs: ['Materiais conforme exigencia de carga', 'Rastreabilidade de lote', 'Inspecao final com relatorio'],
-    applications: ['Manutencao preventiva', 'Reducao de parada por falta de reposicao'],
+    summary: 'Substituição de importados com desempenho equivalente e menor dependência externa.',
+    specs: ['Materiais conforme exigência de carga', 'Rastreabilidade de lote', 'Inspeção final com relatório'],
+    applications: ['Manutenção preventiva', 'Redução de parada por falta de reposição'],
     images: [
       { src: '/produto-roletes.jpg', position: 'center 50%' },
       { src: '/produto-discos-estoque.jpg', position: 'center 50%' },
@@ -94,12 +94,12 @@ const products: Product[] = [
   },
   {
     id: 'dispositivo',
-    name: 'Dispositivo de ajuste e fixacao',
+    name: 'Dispositivo de ajuste e fixação',
     category: 'dispositivos',
     leadTime: '12-20 dias',
-    summary: 'Dispositivo de campo para setup rapido, repetibilidade e maior seguranca operacional.',
-    specs: ['Projeto sob medida', 'Valido para uso continuo', 'Treinamento de uso na entrega'],
-    applications: ['Trocas rapidas de ferramental', 'Padronizacao de setup'],
+    summary: 'Dispositivo de campo para setup rápido, repetibilidade e maior segurança operacional.',
+    specs: ['Projeto sob medida', 'Válido para uso contínuo', 'Treinamento de uso na entrega'],
+    applications: ['Trocas rápidas de ferramental', 'Padronização de setup'],
     images: [
       { src: '/home-bg.jpg', position: 'center 72%' },
       { src: '/teste.jpg', position: 'center 70%' },
@@ -112,9 +112,9 @@ const products: Product[] = [
     name: 'Pacote de engenharia reversa',
     category: 'engenharia',
     leadTime: '20-35 dias',
-    summary: 'Levantamento tecnico completo para reproduzir componentes criticos com confiabilidade.',
-    specs: ['Modelagem 3D e desenho tecnico', 'Analise de tolerancias', 'Plano de validacao funcional'],
-    applications: ['Nacionalizacao de componentes', 'Recuperacao de pecas sem desenho original'],
+    summary: 'Levantamento técnico completo para reproduzir componentes críticos com confiabilidade.',
+    specs: ['Modelagem 3D e desenho técnico', 'Análise de tolerâncias', 'Plano de validação funcional'],
+    applications: ['Nacionalização de componentes', 'Recuperação de peças sem desenho original'],
     images: [
       { src: '/teste.jpg', position: 'center 32%' },
       { src: '/home-bg.jpg', position: 'center 36%' },
@@ -124,12 +124,12 @@ const products: Product[] = [
   },
   {
     id: 'retrofit',
-    name: 'Retrofit de subconjuntos mecanicos',
+    name: 'Retrofit de subconjuntos mecânicos',
     category: 'engenharia',
     leadTime: '25-40 dias',
-    summary: 'Atualizacao de subconjuntos para elevar desempenho e vida util sem troca total da linha.',
-    specs: ['Diagnostico de desgaste e risco', 'Plano tecnico com etapas', 'Implementacao com parada planejada'],
-    applications: ['Aumento de confiabilidade', 'Modernizacao com investimento controlado'],
+    summary: 'Atualização de subconjuntos para elevar desempenho e vida útil sem troca total da linha.',
+    specs: ['Diagnóstico de desgaste e risco', 'Plano técnico com etapas', 'Implementação com parada planejada'],
+    applications: ['Aumento de confiabilidade', 'Modernização com investimento controlado'],
     images: [
       { src: '/home-bg.jpg', position: 'center 50%' },
       { src: '/teste.jpg', position: 'center 50%' },
@@ -141,23 +141,23 @@ const products: Product[] = [
 
 const copyByLocale: Record<Locale, Copy> = {
   pt: {
-    eyebrow: 'Solucoes industriais',
-    title: 'Nossas Solucoes Industriais',
-    description: 'Selecione um card para visualizar detalhes tecnicos, aplicacoes e galeria completa de cada produto.',
-    catalogLabel: 'Linha de solucoes',
+    eyebrow: 'Soluções industriais',
+    title: 'Nossas Soluções Industriais',
+    description: 'Selecione um card para visualizar detalhes técnicos, aplicações e galeria completa de cada produto.',
+    catalogLabel: 'Linha de soluções',
     catalogHint: 'Clique em um card para abrir os detalhes no drawer.',
-    detailsLabel: 'Detalhes da solucao',
+    detailsLabel: 'Detalhes da solução',
     leadTime: 'Prazo',
-    specs: 'Especificacoes',
-    applications: 'Aplicacoes',
-    quote: 'Solicitar proposta tecnica',
+    specs: 'Especificações',
+    applications: 'Aplicações',
+    quote: 'Solicitar proposta técnica',
     whatsapp: 'Falar no WhatsApp',
-    openDrawer: 'Mais informacoes',
+    openDrawer: 'Mais informações',
     closeDrawer: 'Fechar painel',
     gallery: 'Galeria de fotos',
     viewDetails: 'Ver detalhes',
     backdrop: 'Fechar detalhes',
-    whatsappTemplate: 'Ola, gostaria de cotar o produto: {product}.',
+    whatsappTemplate: 'Olá, gostaria de cotar o produto: {product}.',
   },
   en: {
     eyebrow: 'Products and solutions',
@@ -300,7 +300,7 @@ export function ProductsShowcase({ locale = 'pt' }: ProductsShowcaseProps) {
   const copy = copyByLocale[locale] ?? copyByLocale.pt
 
   const categoryLabelsByLocale: Record<Locale, Record<ProductCategory, string>> = {
-    pt: { todos: 'Todos', maquinas: 'Maquinas', pecas: 'Pecas', dispositivos: 'Dispositivos', engenharia: 'Engenharia' },
+    pt: { todos: 'Todos', maquinas: 'Máquinas', pecas: 'Peças', dispositivos: 'Dispositivos', engenharia: 'Engenharia' },
     en: { todos: 'All', maquinas: 'Machines', pecas: 'Parts', dispositivos: 'Devices', engenharia: 'Engineering' },
     es: { todos: 'Todos', maquinas: 'Maquinas', pecas: 'Piezas', dispositivos: 'Dispositivos', engenharia: 'Ingenieria' },
     fr: { todos: 'Tous', maquinas: 'Machines', pecas: 'Pieces', dispositivos: 'Dispositifs', engenharia: 'Ingenierie' },
@@ -309,18 +309,12 @@ export function ProductsShowcase({ locale = 'pt' }: ProductsShowcaseProps) {
 
   const categoryLabels = categoryLabelsByLocale[locale]
 
-  const [activeCategory, setActiveCategory] = useState<ProductCategory>('todos')
   const [selectedProductId, setSelectedProductId] = useState(products[0]?.id ?? '')
 
   const [drawerProductId, setDrawerProductId] = useState<string | null>(null)
   const [drawerPhotoIndex, setDrawerPhotoIndex] = useState(0)
 
-  const filteredProducts = useMemo(
-    () => (activeCategory === 'todos' ? products : products.filter((item) => item.category === activeCategory)),
-    [activeCategory],
-  )
-
-  const selectedProduct = filteredProducts.find((item) => item.id === selectedProductId) ?? filteredProducts[0]
+  const selectedProduct = products.find((item) => item.id === selectedProductId) ?? products[0]
   const drawerProduct = drawerProductId ? products.find((item) => item.id === drawerProductId) ?? null : null
 
   useEffect(() => {
@@ -361,35 +355,6 @@ export function ProductsShowcase({ locale = 'pt' }: ProductsShowcaseProps) {
         <p className="vf-copy mx-auto max-w-3xl">{copy.description}</p>
       </div>
 
-      <div className="mt-8 overflow-x-auto pb-1 scrollbar-hide">
-        <div className="inline-flex min-w-full gap-2 sm:gap-3">
-          {(Object.keys(categoryLabels) as ProductCategory[]).map((category) => {
-            const isActive = category === activeCategory
-
-            return (
-              <button
-                key={category}
-                type="button"
-                onClick={() => {
-                  setActiveCategory(category)
-                  const nextProducts = category === 'todos' ? products : products.filter((item) => item.category === category)
-                  setSelectedProductId(nextProducts[0]?.id ?? '')
-                }}
-                className={`focus-ring relative min-w-[118px] whitespace-nowrap rounded-lg border px-4 pb-2.5 pt-3 text-[11px] font-semibold uppercase tracking-[0.12em] transition ${
-                  isActive
-                    ? 'border-amber-300/50 bg-[#f7f8fa] text-slate-900 shadow-[0_10px_20px_rgba(0,0,0,0.22)]'
-                    : 'border-white/20 bg-white/5 text-slate-200 hover:border-amber-300/30 hover:bg-white/10'
-                }`}
-                aria-pressed={isActive}
-              >
-                {isActive ? <span className="absolute left-4 top-0 h-1 w-14 -translate-y-1/2 rounded-full bg-amber-500" /> : null}
-                <span>{categoryLabels[category]}</span>
-              </button>
-            )
-          })}
-        </div>
-      </div>
-
       <div className="mt-8">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-300">{copy.catalogLabel}</p>
@@ -397,7 +362,7 @@ export function ProductsShowcase({ locale = 'pt' }: ProductsShowcaseProps) {
         </div>
 
         <div className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          {filteredProducts.map((product) => (
+          {products.map((product) => (
             <div key={product.id}>
               <ProductCard
                 product={product}

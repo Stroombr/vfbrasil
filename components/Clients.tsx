@@ -89,9 +89,9 @@ export function ClientList({ locale = 'pt' }: ClientListProps) {
     }
   > = {
     pt: {
-      eyebrow: 'Prova de confianca',
-      title: 'Empresas lideres ja operam com suporte tecnico da VF Brasil',
-      description: 'Relacao de longo prazo com foco em disponibilidade, qualidade e prazo.',
+      eyebrow: 'Prova de confiança',
+      title: 'Empresas líderes já operam com suporte técnico da VF Brasil',
+      description: 'Relação de longo prazo com foco em disponibilidade, qualidade e prazo.',
     },
     en: {
       eyebrow: 'Proof of trust',
