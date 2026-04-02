@@ -87,7 +87,7 @@ const products: Product[] = [
     applications: ['Manutenção preventiva', 'Redução de parada por falta de reposição'],
     images: [
       { src: '/produto-roletes.jpg', position: 'center 50%' },
-      { src: '/produto-discos-estoque.jpg', position: 'center 50%' },
+      { src: '/home-bg.jpg', position: 'center 50%' },
       { src: '/teste.jpg', position: 'center 82%' },
       { src: '/home-bg.jpg', position: 'center 20%' },
     ],
@@ -101,7 +101,7 @@ const products: Product[] = [
     specs: ['Projeto sob medida', 'Válido para uso contínuo', 'Treinamento de uso na entrega'],
     applications: ['Trocas rápidas de ferramental', 'Padronização de setup'],
     images: [
-      { src: '/home-bg.jpg', position: 'center 72%' },
+      { src: '/produto-discos-estoque.jpg', position: 'center 72%' },
       { src: '/teste.jpg', position: 'center 70%' },
       { src: '/home-bg.jpg', position: 'center 30%' },
       { src: '/teste.jpg', position: 'center 46%' },

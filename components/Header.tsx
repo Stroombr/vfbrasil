@@ -8,6 +8,7 @@ import { Menu, X } from 'lucide-react'
 import type { Locale } from '@/data/i18n'
 import { LanguageSwitcher } from './LanguageSwitcher'
 import { NavbarItemsLarge, NavbarItemsStandard } from './Navbar'
+import { ThemeToggle } from './ThemeToggle'
 import vfLogo from './../public/vflogo.png'
 
 type HeaderProps = {
@@ -162,11 +163,19 @@ export function Header({ locale = 'pt' }: HeaderProps) {
           <NavbarItemsLarge locale={locale} />
         </div>
 
-        <div className="ml-auto hidden items-center gap-3 lg:flex">
+        <div className="ml-auto hidden items-center gap-2.5 lg:flex">
+          <ThemeToggle
+            locale={locale}
+            className="theme-toggle-neutral h-8 w-8"
+          />
           <LanguageSwitcher locale={locale} label={copy[locale].language} />
         </div>
 
         <div className="relative z-50 ml-auto flex items-center gap-1.5 lg:hidden">
+          <ThemeToggle
+            locale={locale}
+            className="theme-toggle-neutral h-9 w-9"
+          />
           <button
             type="button"
             className="focus-ring relative z-50 inline-flex min-h-10 min-w-10 items-center justify-center rounded-lg border border-white/20 bg-white/5 p-2 text-slate-100 touch-manipulation transition hover:bg-white/10 hover:text-amber-300"

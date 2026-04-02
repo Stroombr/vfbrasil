@@ -233,7 +233,7 @@ export function PeopleShowcase({ id, locale, people }: PeopleShowcaseProps) {
                     src={person.image}
                     alt={`${copy[locale].personPhoto} ${person.name}`}
                     fill
-                    className="object-cover grayscale"
+                    className="object-cover"
                     sizes="(max-width: 640px) 80vw, (max-width: 1024px) 38vw, 300px"
                   />
                 </div>

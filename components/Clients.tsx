@@ -128,12 +128,12 @@ export function ClientList({ locale = 'pt' }: ClientListProps) {
           {visibleMobileClients.map((client, index) => (
             <article
               key={`mobile-client-${client.alt}-${index}`}
-              className="surface-panel flex min-h-[120px] items-center justify-center rounded-xl px-2 py-4"
+              className="client-logo-card flex min-h-[120px] items-center justify-center rounded-xl px-2 py-4"
             >
               <Image
                 src={client.src}
                 alt={client.alt}
-                className={`${client.imageClassName} w-auto object-contain`}
+                className={`client-logo-image ${client.imageClassName} w-auto object-contain`}
               />
             </article>
           ))}
@@ -153,12 +153,12 @@ export function ClientList({ locale = 'pt' }: ClientListProps) {
         {clients.map((client) => (
           <article
             key={client.alt}
-            className="surface-panel group flex min-h-[150px] items-center justify-center rounded-2xl px-6 py-8 transition hover:-translate-y-1"
+            className="client-logo-card group flex min-h-[150px] items-center justify-center rounded-2xl px-6 py-8 transition hover:-translate-y-1"
           >
             <Image
               src={client.src}
               alt={client.alt}
-              className={`${client.imageClassName} w-auto object-contain transition duration-300 group-hover:scale-105`}
+              className={`client-logo-image ${client.imageClassName} w-auto object-contain transition duration-300 group-hover:scale-105`}
             />
           </article>
         ))}

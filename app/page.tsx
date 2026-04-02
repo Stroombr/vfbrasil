@@ -59,7 +59,7 @@ type UnitsCopy = {
   viewRoute: string
 }
 
-const unitPhotos = ['/unidade-varzea-paulista.jpeg', '/teste.jpg'] as const
+const unitPhotos = ['/teste.jpg', '/teste.jpg'] as const
 
 function getTeamPeople(locale: Locale): TeamPerson[] {
   const byLocale: Record<Locale, TeamPerson[]> = {
@@ -453,7 +453,7 @@ export default async function Home() {
                 return (
                   <article
                     key={location.name}
-                    className="group overflow-hidden rounded-3xl border border-white/10 bg-[#080d15]/60 transition-all duration-300 hover:-translate-y-1 hover:border-amber-300/30"
+                    className="unit-card group overflow-hidden rounded-3xl transition-all duration-300 hover:-translate-y-1"
                   >
                     <div className="relative h-56 overflow-hidden sm:h-64">
                       <Image
@@ -463,8 +463,8 @@ export default async function Home() {
                         className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                         sizes="(max-width: 1024px) 100vw, 50vw"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#060910] via-[#060910]/45 to-transparent" />
-                      <span className="absolute left-4 top-4 inline-flex rounded-full border border-white/20 bg-[#04070f]/75 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-amber-200">
+                      <div className="unit-media-overlay absolute inset-0" />
+                      <span className="unit-media-tag absolute left-4 top-4 inline-flex rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em]">
                         {locationTag}
                       </span>
                     </div>

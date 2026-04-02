@@ -17,7 +17,7 @@ const EVENT_NAME = 'vf-theme-change'
 
 function resolveTheme(): Theme {
   if (typeof window === 'undefined') {
-    return 'dark'
+    return 'light'
   }
 
   const current = document.documentElement.getAttribute('data-theme')
@@ -32,7 +32,7 @@ function resolveTheme(): Theme {
     return stored
   }
 
-  return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+  return 'light'
 }
 
 function applyTheme(theme: Theme) {
@@ -51,7 +51,7 @@ function applyTheme(theme: Theme) {
 }
 
 export function ThemeToggle({ className = '', showLabel = false, locale = 'pt' }: ThemeToggleProps) {
-  const [theme, setTheme] = useState<Theme>('dark')
+  const [theme, setTheme] = useState<Theme>('light')
   const nextTheme = useMemo<Theme>(() => (theme === 'dark' ? 'light' : 'dark'), [theme])
   const copy: Record<
     Locale,
@@ -139,11 +139,17 @@ export function ThemeToggle({ className = '', showLabel = false, locale = 'pt' }
         setTheme(nextTheme)
         applyTheme(nextTheme)
       }}
-      className={`theme-toggle focus-ring inline-flex items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold ${className}`.trim()}
+      aria-pressed={theme === 'dark'}
+      data-theme-current={theme}
+      className={`theme-toggle focus-ring inline-flex items-center justify-center ${
+        showLabel ? 'gap-2 rounded-full px-3 py-2 text-sm font-semibold' : 'h-9 w-9 rounded-xl p-0'
+      } ${className}`.trim()}
       aria-label={toggleLabel}
       title={toggleLabel}
     >
-      {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+      <span className="theme-toggle-icon-wrap" aria-hidden="true">
+        {theme === 'dark' ? <Sun className="theme-toggle-icon h-4 w-4" /> : <Moon className="theme-toggle-icon h-4 w-4" />}
+      </span>
       {showLabel ? <span>{theme === 'dark' ? labels.darkTheme : labels.lightTheme}</span> : null}
     </button>
   )

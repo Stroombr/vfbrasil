@@ -11,12 +11,21 @@ const themeBootstrapScript = `
 (() => {
   try {
     const root = document.documentElement
-    root.setAttribute('data-theme', 'dark')
-    root.classList.remove('theme-light')
-    root.classList.add('theme-dark')
-    window.localStorage.setItem('vf-theme', 'dark')
+    const storedTheme = window.localStorage.getItem('vf-theme')
+    const theme = storedTheme === 'light' || storedTheme === 'dark' ? storedTheme : 'light'
+
+    root.setAttribute('data-theme', theme)
+    root.classList.remove('theme-light', 'theme-dark')
+    root.classList.add(theme === 'light' ? 'theme-light' : 'theme-dark')
+
+    if (storedTheme !== theme) {
+      window.localStorage.setItem('vf-theme', theme)
+    }
   } catch (_error) {
-    // keep default server theme
+    const root = document.documentElement
+    root.setAttribute('data-theme', 'light')
+    root.classList.remove('theme-dark')
+    root.classList.add('theme-light')
   }
 })()
 `
@@ -94,7 +103,7 @@ export default async function RootLayout({
   } as const
 
   return (
-    <html lang={toHtmlLang(locale)} data-theme="dark" className="theme-dark" suppressHydrationWarning>
+    <html lang={toHtmlLang(locale)} data-theme="light" className="theme-light" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeBootstrapScript }} />
       </head>
